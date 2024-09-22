@@ -22,3 +22,6 @@ Implement: Kruskal's algorithm for minimum spanning trees.
 Incrementally building solutions, exploring all possible paths, and abandoning invalid ones.
 
 Solve: Sudoku solver, N-Queens problem, generating permutations.
+
+
+![ClassificationofDataStructure-660x347](https://github.com/user-attachments/assets/da03b04f-29f7-4d53-a24a-f1c825bddef9)
