@@ -98,3 +98,23 @@ class Solution {
 
 
 // 5. Convert Sorted Array to Binary Search Tree
+
+class Solution {
+
+    private TreeNode helper(int[] nums, int startIdx, int endIdx) {
+
+        if (startIdx > endIdx) return null;
+        int mid = startIdx + (endIdx - startIdx) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+
+        node.left = helper(nums, startIdx, mid - 1);
+        node.right = helper(nums, mid + 1, endIdx);
+        return node;
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return null;
+        return helper(nums, 0, n - 1);
+    }
+}
