@@ -57,3 +57,25 @@ class Solution {
 }
 
 // 3. PostOrder → Binary Tree Maximum Path Sum 
+
+class Solution {
+
+    private int findMaxPathSum(TreeNode root, int[] maximum) {
+
+        if (root == null) return 0;
+        int leftSum = Math.max(0, findMaxPathSum(root.left, maximum));
+        int rightSum = Math.max(0, findMaxPathSum(root.right, maximum));
+
+        maximum[0] = Math.max(maximum[0], leftSum + rightSum + root.val);
+        return root.val + Math.max(leftSum, rightSum); 
+    }
+
+    public int maxPathSum(TreeNode root) {
+        
+        int[] maximum = new int[1];
+        maximum[0] = Integer.MIN_VALUE;
+        findMaxPathSum(root, maximum);
+
+        return maximum[0];
+    }
+}
