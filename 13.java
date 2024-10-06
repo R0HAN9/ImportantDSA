@@ -123,3 +123,20 @@ class Solution {
         dfs(board, i + 1, j); // down
     }
 }
+
+// 4. Number of 1 Bits
+
+class Solution {
+    public int hammingWeight(int n) {
+        
+        int result = 0;
+        for (int i = 0; i < 32; i++) {
+            if (((n >> i) & 1) == 1) {
+                result += 1;
+            }
+        }
+        return result;
+    }
+}
+
+// 5. Validate Binary Search Tree
