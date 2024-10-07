@@ -139,3 +139,39 @@ class Solution {
         return returnAll;
     }
 }
+
+
+// 4. Min Stack
+
+class MinStack {
+    private List<int[]> stack;
+
+    public MinStack() {
+        stack = new ArrayList<>();
+    }
+    
+    public void push(int val) {
+        
+        int[] top = stack.isEmpty() ? new int[]{val, val} : stack.get(stack.size() - 1);
+        int minValue = top[1];
+        
+        if (minValue > val) {
+            minValue = val;
+        }
+        stack.add(new int[]{val, minValue});
+    }
+    
+    public void pop() {
+        stack.remove(stack.size() - 1);
+    }
+    
+    public int top() {
+        return stack.isEmpty() ? -1 : stack.get(stack.size() - 1)[0];
+    }
+    
+    public int getMin() {
+        return stack.isEmpty() ? -1 : stack.get(stack.size() - 1)[1];
+    }
+}
+
+// 5. Contains Duplicate 
