@@ -40,6 +40,29 @@ class Solution {
 
 // 3. Longest Common Subsequence (LCS) 
 
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        
+        int[] dp = new int[text1.length()];
+        int longest = 0;
+
+        for (char c : text2.toCharArray()) {
+            int currentLen = 0;
+
+            for (int i = 0; i < dp.length; i++) {
+                if (currentLen < dp[i]) {
+                    currentLen = dp[i];
+                }
+                else if (c == text1.charAt(i)) {
+                    dp[i] = currentLen + 1;
+                    longest = Math.max(longest, currentLen + 1);
+                }
+            }
+        }
+        return longest;
+    }
+}
+
 // 4. Longest Increasing Subsequence (LIS) 
 
 // 5. Partition Equal Subset Sum 
