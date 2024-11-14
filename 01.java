@@ -17,6 +17,7 @@ class NumArray {
 }
 
 
+
 // 2. Contiguous Array
 
 class Solution {
@@ -45,6 +46,7 @@ class Solution {
 }
 
 
+
 // 3. Subarray Sum Equals K
 
 class Solution {
@@ -69,8 +71,8 @@ class Solution {
 }
 
 
-// 04. Two Sum
 
+// 04. Two Sum
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -89,8 +91,8 @@ class Solution {
 }
 
 
-// 05. Valid Parentheses
 
+// 05. Valid Parentheses
 
 class Solution {
     public boolean isValid(String s) {
