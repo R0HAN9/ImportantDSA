@@ -18,8 +18,9 @@ public class Solution {
     }
 }
 
-// 2. Happy Number
 
+
+// 2. Happy Number
 
 class Solution {
     public boolean isHappy(int n) {
@@ -49,8 +50,8 @@ class Solution {
 }
 
 
-// 3. Find the Duplicate Number 
 
+// 3. Find the Duplicate Number 
 
 class Solution {
     public int findDuplicate(int[] nums) {
@@ -78,8 +79,8 @@ class Solution {
 }
 
 
-// 4. Valid Anagram
 
+// 4. Valid Anagram
 
  class Solution {
     public boolean isAnagram(String s, String t) {
@@ -100,8 +101,8 @@ class Solution {
 }
 
 
-// 5. Binary Search
 
+// 5. Binary Search
 
 class Solution {
     public int search(int[] nums, int target) {
