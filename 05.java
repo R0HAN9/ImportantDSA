@@ -14,18 +14,9 @@ class Solution {
 }
 
 
+
 // 2. Reverse Linked List II
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
         if (head == null || left == right) {
@@ -54,8 +45,8 @@ class Solution {
 }
 
 
-// 3. Swap Nodes in Pairs
 
+// 3. Swap Nodes in Pairs
 
 class Solution {
     public ListNode swapPairs(ListNode head) {
@@ -79,8 +70,8 @@ class Solution {
 }
 
 
-// 4. Linked List Cycle
 
+// 4. Linked List Cycle
 
 public class Solution {
     public boolean hasCycle(ListNode head) {
@@ -101,9 +92,8 @@ public class Solution {
 }
 
 
+
 // 5. Maximum Depth of Binary Tree
-
-
 
 class Solution {
     public int maxDepth(TreeNode root) {
@@ -116,5 +106,3 @@ class Solution {
         return Math.max(left, right) + 1;
     }
 }
-
-
