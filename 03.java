@@ -17,6 +17,8 @@ class Solution {
     }
 }
 
+
+
 // 2. Longest Substring Without Repeating Characters 
 
 class Solution {
@@ -42,8 +44,9 @@ class Solution {
     }
 }
 
-// 3. Minimum Window Substring
 
+
+// 3. Minimum Window Substring
 
 class Solution {
     public String minWindow(String s, String t) {
@@ -93,8 +96,8 @@ class Solution {
 }
 
 
-// 4.  Valid Palindrome
 
+// 4.  Valid Palindrome
 
 class Solution {
     public boolean isPalindrome(String s) {
@@ -122,8 +125,8 @@ class Solution {
 }
 
 
-// 5. Invert Binary Tree
 
+// 5. Invert Binary Tree
 
 class Solution {
     public TreeNode invertTree(TreeNode root) {
@@ -141,5 +144,3 @@ class Solution {
         return root;        
     }
 }
-
-
