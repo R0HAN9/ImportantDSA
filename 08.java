@@ -23,9 +23,9 @@ class Solution {
     }
 }
 
+
+
 // 2. Insert Interval
-
-
 
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
@@ -55,6 +55,9 @@ class Solution {
     }
 }
 
+
+
+
 // 3. Non-Overlapping Intervals
 
 class Solution {
@@ -76,6 +79,8 @@ class Solution {
     }
 }
 
+
+
 // 4. Reverse String
 
 class Solution {
@@ -91,23 +96,9 @@ class Solution {
     }
 }
 
+
 // 5. Diameter of Binary Tree
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
     int maxx = 0;
     public int diameterOfBinaryTree(TreeNode root) {
