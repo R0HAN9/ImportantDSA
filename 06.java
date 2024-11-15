@@ -1,6 +1,5 @@
 // 1. Next Greater Element I
 
-
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         
@@ -29,8 +28,8 @@ class Solution {
 }
 
 
-// 2. Daily Temperatures
 
+// 2. Daily Temperatures
 
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
@@ -50,8 +49,8 @@ class Solution {
 }
 
 
-// 3. Largest Rectangle in Histogram
 
+// 3. Largest Rectangle in Histogram
 
 class Solution {
     public int largestRectangleArea(int[] heights) {
@@ -77,8 +76,8 @@ class Solution {
 }
 
 
-// 4. Single Number
 
+// 4. Single Number
 
 class Solution {
     public int singleNumber(int[] nums) {
@@ -94,8 +93,8 @@ class Solution {
 }
 
 
-// 5. Reverse Linked List
-    
+
+// 5. Reverse Linked List  
     
     class Solution {
     public ListNode reverseList(ListNode head) {
