@@ -26,26 +26,31 @@ class NumArray {
 
 class Solution {
     public int findMaxLength(int[] nums) {
-        
-        int n = nums.length;
-        Map<Integer, Integer> mp = new HashMap<>();
-        int sum = 0;
-        int subArrayLength = 0;
+        int n = nums.length; // Length of the input array
+        Map<Integer, Integer> mp = new HashMap<>(); // HashMap to store the sum and its first occurrence index
+        int sum = 0; // Variable to keep track of the cumulative sum
+        int subArrayLength = 0; // Variable to store the maximum length of the subarray found
 
+        // Iterate through the array
         for (int i = 0; i < n; i++) {
+            // Convert 0 to -1 for easier handling of the equal count condition
             sum += nums[i] == 0 ? -1 : 1;
 
+            // If the cumulative sum is 0, it means the subarray from the start to the current index is valid
             if (sum == 0) {
-                subArrayLength = i + 1;
+                subArrayLength = i + 1; // Update the subarray length to the current index + 1
             }
+            // If the sum has been seen before, a subarray with equal 0s and 1s exists between the two occurrences
             else if (mp.containsKey(sum)) {
+                // Update the maximum subarray length found so far
                 subArrayLength = Math.max(subArrayLength, i - mp.get(sum));
             }
+            // If the sum is not in the map, store its first occurrence index
             else {
                 mp.put(sum, i);
             }
         }
-        return subArrayLength;
+        return subArrayLength; // Return the maximum subarray length
     }
 }
 
