@@ -1,18 +1,22 @@
 // 1. Range Sum Query - Immutable
 
 class NumArray {
+    // Private array to store the input numbers
     private int[] nums;
 
+    // Constructor to initialize the array
     public NumArray(int[] nums) {
-        this.nums = nums;
+        this.nums = nums; // Store the input array in the private nums array
     }
     
+    // Method to calculate the sum of elements within a given range [left, right]
     public int sumRange(int left, int right) {
-        int sum = 0;
+        int sum = 0; // Variable to store the sum of elements
+        // Loop through the array from index 'left' to 'right' (inclusive)
         for (int i = left; i <= right; i++) {
-            sum += nums[i];
+            sum += nums[i]; // Add each element in the range to the sum
         }
-        return sum;
+        return sum; // Return the computed sum
     }
 }
 
