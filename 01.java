@@ -60,22 +60,29 @@ class Solution {
 
 class Solution {
     public int subarraySum(int[] nums, int k) {
-        
-        int sum = 0;
-        int count = 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+        int sum = 0; // Variable to keep track of the cumulative sum
+        int count = 0; // Variable to count the number of subarrays with sum equal to k
+        HashMap<Integer, Integer> map = new HashMap<>(); // Map to store cumulative sum frequencies
+        map.put(0, 1); // Initialize the map with sum 0 occurring once (important for subarrays starting from index 0)
 
+        // Iterate through the array
         for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
+            sum += nums[i]; // Update the cumulative sum
+
+            // Calculate the remaining sum needed to reach k
             int rem = sum - k;
 
+            // If the remaining sum exists in the map, it means there are subarrays ending at the current index
+            // that sum to k
             if (map.containsKey(rem)) {
-                count += map.get(rem);
+                count += map.get(rem); // Add the frequency of the remaining sum to the count
             }
+
+            // Update the frequency of the current cumulative sum in the map
             map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
-        return count;
+
+        return count; // Return the total count of subarrays with sum equal to k
     }
 }
 
