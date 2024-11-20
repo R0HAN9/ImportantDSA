@@ -92,16 +92,24 @@ class Solution {
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
+        // HashMap to store the elements and their indices for quick lookup
         Map<Integer, Integer> pairIdx = new HashMap<>();
 
+        // Loop through the array to find the required pair
         for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
+            int num = nums[i]; // Current number in the array
 
+            // Check if the complement (target - num) exists in the map
             if (pairIdx.containsKey(target - num)) {
+                // If found, return the current index and the index of the complement
                 return new int[] {i, pairIdx.get(target - num)};
             }
+
+            // Store the current number and its index in the map for future lookup
             pairIdx.put(num, i);
         }
+
+        // If no solution is found (though the problem guarantees one), return an empty array
         return new int[] {};
     }
 }
