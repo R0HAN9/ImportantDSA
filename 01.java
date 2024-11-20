@@ -120,24 +120,30 @@ class Solution {
 
 class Solution {
     public boolean isValid(String s) {
-        
+        // Stack to store opening brackets for matching with closing brackets
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> mapping = new HashMap<>();
 
+        // HashMap to define the mapping of closing brackets to their corresponding opening brackets
+        Map<Character, Character> mapping = new HashMap<>();
         mapping.put(')', '(');
         mapping.put('}', '{');
         mapping.put(']', '[');
 
+        // Iterate through each character in the string
         for (char c : s.toCharArray()) {
+            // If the character is an opening bracket, push it onto the stack
             if (mapping.containsValue(c)) {
                 stack.push(c);
-
-            }else if (mapping.containsKey(c)) {
+            }
+            // If the character is a closing bracket
+            else if (mapping.containsKey(c)) {
+                // Check if the stack is empty or the top of the stack does not match the current closing bracket
                 if (stack.isEmpty() || mapping.get(c) != stack.pop()) {
-                    return false;
+                    return false; // Invalid string if the brackets do not match
                 }
             }
         }
+        // If the stack is empty at the end, all brackets were matched correctly
         return stack.isEmpty();
     }
 }
