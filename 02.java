@@ -2,25 +2,34 @@
 
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
+        // Initialize two pointers: left at the beginning and right at the end
         int left = 0;
         int right = numbers.length - 1;
 
+        // Use a while loop to iterate through the array
         while (left < right) {
+            // Calculate the sum of the two numbers at the left and right pointers
             int total = numbers[left] + numbers[right];
 
+            // If the sum matches the target, return the 1-based indices
             if (total == target) {
-                return new int[] {left + 1, right + 1};
+                return new int[] {left + 1, right + 1};  // +1 to convert to 1-based index
             }
+            // If the sum is greater than the target, move the right pointer leftward
             else if (total > target) {
                 right--;
             }
+            // If the sum is less than the target, move the left pointer rightward
             else {
                 left++;
             }
         }
+        
+        // If no solution is found, return an array with -1, -1 (indicating no solution)
         return new int[] {-1, -1};
     }
 }
+
 
 
 
