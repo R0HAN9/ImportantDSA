@@ -91,23 +91,33 @@ class Solution {
 
 class Solution {
     public int maxArea(int[] height) {
+    // Initialize variable to store the maximum area found so far
         int maxArea = 0;
+    
+    // Set the left and right pointers, which initially point to the first and last elements of the array
         int left = 0;
         int right = height.length - 1;
 
+    // Iterate while left pointer is to the left of right pointer
         while (left < right) {
+        // Calculate the area between the two pointers (width * height)
+        // Width is the distance between the two pointers: (right - left)
+        // Height is the minimum of the heights at the two pointers
             maxArea = Math.max(maxArea, (right - left) * Math.min(height[left], height[right]));
 
+        // Move the pointer that points to the shorter height, 
+        // because the area is limited by the shorter height
             if (height[left] < height[right]) {
-                left++;
+                left++; // Move the left pointer to the right
             } else {
-                right--;
-            }
+                right--; // Move the right pointer to the left
         }
-
-        return maxArea;        
     }
+
+    // Return the maximum area found
+    return maxArea;
 }
+
 
 
 
