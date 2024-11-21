@@ -155,19 +155,28 @@ class Solution {
 
 class Solution {
     public int maxProfit(int[] prices) {
+        // Initialize the buying price as the first price
         int buyPrice = prices[0];
+        
+        // Initialize the profit to 0, as we haven't made any transactions yet
         int profit = 0;
 
+        // Iterate through the prices starting from the second element
         for (int i = 1; i < prices.length; i++) {
+            // If we find a lower price, we update the buyPrice to that lower price
             if (buyPrice > prices[i]) {
                 buyPrice = prices[i];
             }
 
+            // Calculate the potential profit for selling at the current price
+            // and update the max profit if the current profit is greater
             profit = Math.max(profit, prices[i] - buyPrice);
         }
 
+        // Return the maximum profit after checking all prices
         return profit;        
     }
 }
+
 
 
