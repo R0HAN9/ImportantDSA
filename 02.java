@@ -125,20 +125,29 @@ class Solution {
 
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // Base case: If one of the lists is null, return the other list
+        // If both lists are null, return null by default
         if (list1 == null || list2 == null) {
             return (list1 != null) ? list1 : list2;
         }
 
+        // Make sure list1 is always the smaller list (or equal)
+        // Swap the lists if list2's value is smaller
         if (list1.val > list2.val) {
             ListNode temp = list1;
             list1 = list2;
             list2 = temp;
         }
 
+        // Recur for the next nodes of both lists
+        // Since list1 is guaranteed to be smaller or equal, we link it to the result of the next merge
         list1.next = mergeTwoLists(list1.next, list2);
+
+        // Return the merged list starting from list1
         return list1;        
     }
 }
+
 
 
 
