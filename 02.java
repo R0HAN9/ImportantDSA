@@ -37,37 +37,54 @@ class Solution {
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
+        // Create a list to store the resulting triplets
         List<List<Integer>> res = new ArrayList<>();
+        
+        // Sort the array to make it easier to avoid duplicates and perform the two-pointer approach
         Arrays.sort(nums);
 
+        // Iterate through the array to find potential triplets
         for (int i = 0; i < nums.length; i++) {
+            // Skip duplicate values for the first element of the triplet
             if (i > 0 && nums[i] == nums[i-1]) {
                 continue;
             }
             
+            // Initialize two pointers: j (left) and k (right) for the remaining part of the array
             int j = i + 1;
             int k = nums.length - 1;
 
+            // Use the two-pointer approach to find pairs that sum up to the negative of nums[i]
             while (j < k) {
+                // Calculate the sum of the triplet: nums[i], nums[j], nums[k]
                 int total = nums[i] + nums[j] + nums[k];
 
+                // If the sum is greater than zero, move the right pointer leftward to decrease the sum
                 if (total > 0) {
                     k--;
-                } else if (total < 0) {
+                } 
+                // If the sum is less than zero, move the left pointer rightward to increase the sum
+                else if (total < 0) {
                     j++;
-                } else {
+                } 
+                // If the sum is exactly zero, add the triplet to the result
+                else {
                     res.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    j++;
+                    j++;  // Move the left pointer rightward to continue searching for other pairs
 
+                    // Skip over duplicate values for the second element (nums[j])
                     while (nums[j] == nums[j-1] && j < k) {
                         j++;
                     }
                 }
             }
         }
+        
+        // Return the list of triplets found
         return res;        
     }
 }
+
 
 
 // 3. Container With Most Water
