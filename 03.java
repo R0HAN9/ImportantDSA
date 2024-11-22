@@ -78,50 +78,70 @@ class Solution {
 
 class Solution {
     public String minWindow(String s, String t) {
+        // If string s is shorter than t, no window can contain t, so return an empty string
         if (s.length() < t.length()) {
             return "";
         }
 
+        // Map to store the frequency count of characters in t
         Map<Character, Integer> charCount = new HashMap<>();
         for (char ch : t.toCharArray()) {
             charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
         }
 
+        // Number of characters from t that we still need to find in s
         int targetCharsRemaining = t.length();
+        
+        // Array to store the start and end indices of the smallest window found
         int[] minWindow = {0, Integer.MAX_VALUE};
+
+        // Pointer to mark the start of the window
         int startIndex = 0;
 
+        // Iterate through the string s with the end pointer
         for (int endIndex = 0; endIndex < s.length(); endIndex++) {
             char ch = s.charAt(endIndex);
+            
+            // If the character in s is needed in t, decrease targetCharsRemaining
             if (charCount.containsKey(ch) && charCount.get(ch) > 0) {
                 targetCharsRemaining--;
             }
+
+            // Decrease the frequency of the current character in charCount map
             charCount.put(ch, charCount.getOrDefault(ch, 0) - 1);
 
+            // If we have found all characters of t in the current window
             if (targetCharsRemaining == 0) {
+                // Shrink the window from the left side to find the minimum window
                 while (true) {
                     char charAtStart = s.charAt(startIndex);
                     if (charCount.containsKey(charAtStart) && charCount.get(charAtStart) == 0) {
                         break;
                     }
+                    // Increase the frequency of the character at the start
                     charCount.put(charAtStart, charCount.getOrDefault(charAtStart, 0) + 1);
-                    startIndex++;
+                    startIndex++;  // Move the start pointer to the right
                 }
 
+                // If the current window is smaller than the previous smallest window, update minWindow
                 if (endIndex - startIndex < minWindow[1] - minWindow[0]) {
                     minWindow[0] = startIndex;
                     minWindow[1] = endIndex;
                 }
 
+                // Restore the frequency of the character at start and increment targetCharsRemaining
                 charCount.put(s.charAt(startIndex), charCount.getOrDefault(s.charAt(startIndex), 0) + 1);
                 targetCharsRemaining++;
-                startIndex++;
+                startIndex++;  // Move start pointer to the right for the next possible window
             }
         }
 
+        // If no valid window is found, return an empty string
+        // Otherwise, return the substring that corresponds to the minimum window
         return minWindow[1] >= s.length() ? "" : s.substring(minWindow[0], minWindow[1] + 1);        
     }
 }
+
 
 
 
