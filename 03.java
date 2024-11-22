@@ -3,19 +3,29 @@
 class Solution {
     public double findMaxAverage(int[] nums, int k) {
         
+        // Initialize the sum of the first 'k' elements
         int sum = 0;
         for (int i = 0; i < k; i++) {
             sum += nums[i];
         }
 
+        // Initialize maxSum with the sum of the first 'k' elements
         int maxSum = sum;
+
+        // Iterate through the array starting from index 'k' to find the maximum sum of 'k' consecutive elements
         for (int i = k; i < nums.length; i++) {
+            // Update the sum by adding the current element and removing the element that is now out of the window
             sum += nums[i] - nums[i - k];
+            
+            // Update maxSum if the current sum is greater
             maxSum = Math.max(maxSum, sum);
         }
+        
+        // Return the maximum average by dividing maxSum by 'k'
         return (double)maxSum / k;
     }
 }
+
 
 
 
