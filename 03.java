@@ -33,26 +33,44 @@ class Solution {
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        // Initialize maxLength to store the length of the longest substring found
         int maxLength = 0;
+        
+        // 'left' pointer to track the start of the current window
         int left = 0;
+        
+        // HashMap to store the count of characters in the current window
         Map<Character, Integer> count = new HashMap<>();
 
+        // Iterate through the string with 'right' pointer to expand the window
         for (int right = 0; right < s.length(); right++) {
+            // Get the character at the current 'right' index
             char c = s.charAt(right);
+            
+            // Update the count of the current character in the window
             count.put(c, count.getOrDefault(c, 0) + 1);
             
+            // If there are duplicate characters in the window, shrink the window from the left
             while (count.get(c) > 1) {
+                // Get the character at the 'left' index
                 char leftChar = s.charAt(left);
+                
+                // Decrease the count of the character at the 'left' index
                 count.put(leftChar, count.get(leftChar) - 1);
+                
+                // Move the 'left' pointer to the right to shrink the window
                 left++;
             }
             
+            // Update maxLength to the larger of the current maxLength and the length of the current window
             maxLength = Math.max(maxLength, right - left + 1);
         }
         
+        // Return the length of the longest substring without repeating characters
         return maxLength;       
     }
 }
+
 
 
 
