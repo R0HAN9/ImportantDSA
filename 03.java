@@ -186,17 +186,24 @@ class Solution {
 
 class Solution {
     public TreeNode invertTree(TreeNode root) {
+        // Base case: if the root is null, return null (no tree to invert)
         if (root == null) {
             return null;
         }
         
+        // Swap the left and right child of the current node
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
         
+        // Recursively invert the left subtree
         invertTree(root.left);
+        
+        // Recursively invert the right subtree
         invertTree(root.right);
         
+        // Return the root of the inverted tree
         return root;        
     }
 }
+
