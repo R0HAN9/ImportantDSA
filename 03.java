@@ -149,28 +149,36 @@ class Solution {
 
 class Solution {
     public boolean isPalindrome(String s) {
+        // Convert the string to lowercase to ignore case sensitivity
         s = s.toLowerCase();
+        
+        // Remove all non-alphanumeric characters (like spaces, punctuation)
         s = s.replaceAll("[^a-zA-Z0-9]", "");
-        if(s.length()<1){
+        
+        // If the string is empty after cleaning, it's considered a palindrome
+        if(s.length() < 1){
             return true;
         }
-        int i = 0;
-        return Solution.rec(i,s);
-    }
-    static private boolean rec(int i, String s){
         
-            // Base Condition
-            // If i exceeds half of the string, means all the elements 
-            // are compared, we return true.
-            if(i>=s.length()/2) return true;
-            
-            // If start is not equal to end, not palindrome.
-            if(s.charAt(i)!=s.charAt(s.length()-i-1)) return false;
-            
-            // If both characters are same, increment i and check start+1 and end-1.
-            return rec(i+1,s);
+        // Start checking characters from the beginning
+        int i = 0;
+        
+        // Call the recursive function to check if the string is a palindrome
+        return Solution.rec(i, s);
+    }
+    
+    static private boolean rec(int i, String s){
+        // Base condition: if i reaches the middle of the string, all characters have been checked
+        if(i >= s.length() / 2) return true;
+        
+        // If the characters at the start and end of the current window don't match, it's not a palindrome
+        if(s.charAt(i) != s.charAt(s.length() - i - 1)) return false;
+        
+        // If characters match, move to the next characters (i + 1) and check the next characters
+        return rec(i + 1, s);
     }
 }
+
 
 
 
