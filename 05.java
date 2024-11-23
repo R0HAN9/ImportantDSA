@@ -30,30 +30,44 @@ class Solution {
 
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
+        // If the list is empty or no reversal is needed (left == right), return the original list.
         if (head == null || left == right) {
             return head;
         }
 
+        // Create a dummy node to handle edge cases (e.g., reversing starts at the head).
         ListNode dummy = new ListNode(0);
         dummy.next = head;
+
+        // Initialize 'prev' to the node before the reversal starts.
         ListNode prev = dummy;
 
+        // Move 'prev' to the node just before the 'left' position.
         for (int i = 0; i < left - 1; i++) {
             prev = prev.next;
         }
 
+        // 'cur' points to the first node in the sublist to be reversed.
         ListNode cur = prev.next;
 
+        // Perform the reversal between 'left' and 'right' positions.
         for (int i = 0; i < right - left; i++) {
+            // Temporarily store the next node to be reversed.
             ListNode temp = cur.next;
+
+            // Adjust pointers to skip 'temp' in the original order.
             cur.next = temp.next;
+
+            // Insert 'temp' at the beginning of the reversed section.
             temp.next = prev.next;
             prev.next = temp;
         }
 
-        return dummy.next;        
+        // Return the head of the modified list (dummy.next).
+        return dummy.next;
     }
 }
+
 
 
 
