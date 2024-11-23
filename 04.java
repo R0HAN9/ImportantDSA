@@ -75,28 +75,37 @@ class Solution {
 
 class Solution {
     public int findDuplicate(int[] nums) {
+        // Initialize two pointers, both starting at the first element of the array.
         int slow = nums[0];
         int fast = nums[0];
 
+        // Phase 1: Use the Floyd's Tortoise and Hare algorithm to find the intersection point.
         while (true) {
+            // Move the slow pointer one step ahead.
             slow = nums[slow];
+            // Move the fast pointer two steps ahead.
             fast = nums[nums[fast]];
 
+            // Break the loop when slow and fast pointers meet.
             if (slow == fast) {
                 break;
             }
         }
 
-        int slow2 = nums[0];
+        // Phase 2: Find the entrance to the cycle, which is the duplicate number.
+        int slow2 = nums[0]; // Start a new pointer from the beginning.
 
+        // Move both pointers one step at a time until they meet.
         while (slow != slow2) {
             slow = nums[slow];
             slow2 = nums[slow2];
         }
 
-        return slow;        
+        // The meeting point is the duplicate number.
+        return slow;
     }
 }
+
 
 
 
