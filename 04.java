@@ -33,30 +33,41 @@ public class Solution {
 
 class Solution {
     public boolean isHappy(int n) {
+        // Use two pointers (slow and fast) to detect a cycle in the sequence of numbers.
+        // Start slow with the next number and fast with the next-next number.
         int slow = getNextNumber(n);
         int fast = getNextNumber(getNextNumber(n));
 
+        // Continue until slow and fast pointers meet, which would indicate a cycle.
         while (slow != fast) {
+            // If the fast pointer reaches 1, the number is happy.
             if (fast == 1) return true;
+
+            // Move slow pointer one step ahead in the sequence.
             slow = getNextNumber(slow);
+            // Move fast pointer two steps ahead in the sequence.
             fast = getNextNumber(getNextNumber(fast));
         }
 
+        // If the loop ends and slow equals 1, the number is happy.
         return slow == 1;
     }
 
+    // Helper function to compute the sum of the squares of the digits of a number.
     private int getNextNumber(int n) {
         int output = 0;
         
+        // Extract each digit of the number.
         while (n > 0) {
-            int digit = n % 10;
-            output += digit * digit;
-            n = n / 10;
+            int digit = n % 10; // Get the last digit.
+            output += digit * digit; // Add the square of the digit to the output.
+            n = n / 10; // Remove the last digit from the number.
         }
         
-        return output;
+        return output; // Return the computed sum of squares.
     }
 }
+
 
 
 
