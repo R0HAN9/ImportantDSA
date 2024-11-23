@@ -111,23 +111,30 @@ class Solution {
 
 // 4. Valid Anagram
 
- class Solution {
+class Solution {
     public boolean isAnagram(String s, String t) {
+        // If the strings have different lengths, they can't be anagrams.
         if (s.length() != t.length()) {
             return false;
         }
 
+        // Create two hash maps to count the frequency of each character in both strings.
         HashMap<Character, Integer> sCount = new HashMap<>();
         HashMap<Character, Integer> tCount = new HashMap<>();
 
+        // Iterate through each character of both strings simultaneously.
         for (int i = 0; i < s.length(); i++) {
+            // Update the count of the current character from string 's' in sCount.
             sCount.put(s.charAt(i), 1 + sCount.getOrDefault(s.charAt(i), 0));
+            // Update the count of the current character from string 't' in tCount.
             tCount.put(t.charAt(i), 1 + tCount.getOrDefault(t.charAt(i), 0));
         }
 
+        // Check if the two hash maps are equal. If they are, 's' and 't' are anagrams.
         return sCount.equals(tCount);        
     }
 }
+
 
 
 
