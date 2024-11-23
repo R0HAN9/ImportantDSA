@@ -142,19 +142,33 @@ class Solution {
 
 class Solution {
     public int search(int[] nums, int target) {
-        int l=0;
-        int h=nums.length-1;
-        while(l<=h){
-            int mid = (l+h)/2;
-            if(nums[mid]==target){
-                return mid;
+        // Initialize the left (l) and right (h) pointers for the search range.
+        int l = 0;
+        int h = nums.length - 1;
+
+        // Continue searching while the search range is valid.
+        while (l <= h) {
+            // Calculate the mid-point of the current search range.
+            int mid = (l + h) / 2;
+
+            // Check if the mid-point value is the target.
+            if (nums[mid] == target) {
+                return mid; // Target found, return its index.
             }
-            if(nums[mid]>target){
-                h = mid-1;
-            }else{
-                l = mid+1;
+
+            // If the mid-point value is greater than the target,
+            // narrow the search to the left half by updating the high pointer.
+            if (nums[mid] > target) {
+                h = mid - 1;
+            } else {
+                // Otherwise, narrow the search to the right half
+                // by updating the low pointer.
+                l = mid + 1;
             }
         }
+
+        // If the loop ends without finding the target, return -1.
         return -1;
     }
 }
+
