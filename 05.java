@@ -75,24 +75,35 @@ class Solution {
 
 class Solution {
     public ListNode swapPairs(ListNode head) {
+        // Create a dummy node to handle edge cases and simplify the logic.
+        // The dummy node points to the head of the list.
         ListNode dummy = new ListNode(0, head);
-        ListNode prev = dummy, cur = head;
+        ListNode prev = dummy; // 'prev' initially points to the dummy node.
+        ListNode cur = head;   // 'cur' initially points to the head of the list.
 
+        // Traverse the list while there are at least two nodes to swap.
         while (cur != null && cur.next != null) {
+            // Store the node after the pair (node to process after swapping).
             ListNode npn = cur.next.next;
+
+            // Identify the second node of the pair.
             ListNode second = cur.next;
 
-            second.next = cur;
-            cur.next = npn;
-            prev.next = second;
+            // Reverse the pair by adjusting pointers.
+            second.next = cur; // The second node now points to the first node.
+            cur.next = npn;    // The first node now points to the node after the pair.
+            prev.next = second; // The previous node now points to the new first node of the pair.
 
-            prev = cur;
-            cur = npn;
+            // Move the 'prev' and 'cur' pointers forward for the next pair.
+            prev = cur; // 'prev' moves to the current node, which is now the second node of the swapped pair.
+            cur = npn;  // 'cur' moves to the next pair (or null if at the end of the list).
         }
 
-        return dummy.next;        
+        // Return the new head of the list (dummy.next).
+        return dummy.next;
     }
 }
+
 
 
 
