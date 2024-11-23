@@ -2,21 +2,30 @@
 
 public class Solution {
     public boolean hasCycle(ListNode head) {
+        // Initialize two pointers: fast and slow, both starting at the head of the list.
         ListNode fast = head;
         ListNode slow = head;
 
+        // Traverse the list until the fast pointer or its next node becomes null
+        // (indicating the end of the list) to avoid null pointer exceptions.
         while (fast != null && fast.next != null) {
+            // Move the fast pointer two steps ahead.
             fast = fast.next.next;
+            // Move the slow pointer one step ahead.
             slow = slow.next;
 
+            // If the fast pointer meets the slow pointer, a cycle is detected.
             if (fast == slow) {
-                return true;
+                return true; // Return true as there is a cycle.
             }
         }
 
-        return false;        
+        // If the loop completes without the fast and slow pointers meeting,
+        // it means there is no cycle in the linked list.
+        return false;
     }
 }
+
 
 
 
