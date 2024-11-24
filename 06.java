@@ -79,25 +79,41 @@ class Solution {
 class Solution {
     public int largestRectangleArea(int[] heights) {
         
-        int n = heights.length;
-        int maxArea = 0;
-        Stack<Integer> st = new Stack<>();
+        int n = heights.length;  // The number of bars in the histogram
+        int maxArea = 0;  // To keep track of the maximum area found
+        Stack<Integer> st = new Stack<>();  // Stack to store indices of the bars
 
+        // Iterate over all bars (including one extra iteration to handle remaining bars in the stack)
         for (int i = 0; i <= n; i++) {
+            // If we've reached the end of the histogram, set current height to 0 (to pop remaining bars)
             int currHeight = i == n ? 0 : heights[i];
 
+            // While stack is not empty and the current height is less than the height at the index at the top of the stack
             while (!st.isEmpty() && currHeight < heights[st.peek()]) {
                 
+                // Pop the top index from the stack and calculate the area with the popped height
                 int top = st.pop();
-                int width = st.isEmpty() ? i : i-st.peek() - 1;
+                
+                // Calculate the width of the rectangle: 
+                // If the stack is empty, the width is from index 0 to i (i.e., all bars from 0 to i-1).
+                // Otherwise, the width is from the next index in the stack (after popping) to the current index i.
+                int width = st.isEmpty() ? i : i - st.peek() - 1;
+                
+                // Calculate the area using the height of the popped bar and the width
                 int area = heights[top] * width;
+                
+                // Update the maximum area found
                 maxArea = Math.max(area, maxArea);
             }
+            // Push the current index onto the stack
             st.push(i);
         }
+        
+        // Return the maximum area found
         return maxArea;
     }
 }
+
 
 
 
