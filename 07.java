@@ -185,10 +185,17 @@ class Solution {
 class Solution {
     public int missingNumber(int[] nums) {
         
+        // Initialize the result to the length of the array
+        // This is because, in the sum formula, the missing number is effectively the result.
         int result = nums.length;
+
+        // Iterate through each number in the array
         for (int i = 0; i < nums.length; i++) {
+            // Add the index i to the result, and subtract nums[i] to "cancel out" the value of nums[i]
             result += i - nums[i];
         }
+
+        // The result now contains the missing number
         return result;
     }
 }
