@@ -48,20 +48,29 @@ class Solution {
 
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
+        // Stack to store indices of temperatures in increasing order
         Stack<Integer> stack = new Stack<>();
+        
+        // Result array to store the number of days to wait for a warmer temperature
         int[] result = new int[temperatures.length];
 
+        // Iterate through the temperatures array
         for (int i = 0; i < temperatures.length; i++) {
+            // Check if the current temperature is higher than the one at the top of the stack
+            // If it is, we pop from the stack and update the result array
             while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                int idx = stack.pop();
-                result[idx] = i - idx;
+                int idx = stack.pop();  // Get the index of the previous temperature
+                result[idx] = i - idx;  // Calculate the number of days to wait for a warmer temperature
             }
+            // Push the current index onto the stack
             stack.push(i);
         }
 
+        // Return the result array after processing all temperatures
         return result;        
     }
 }
+
 
 
 
