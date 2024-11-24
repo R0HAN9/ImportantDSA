@@ -158,18 +158,25 @@ class Solution {
 class Solution {
     public int majorityElement(int[] nums) {
         
+        // Initialize variables: res to store the current candidate and majority to track the count
         int res = 0;
         int majority = 0;
 
+        // Iterate through each number in the array
         for (int n : nums) {
+            // If majority count is 0, set the current number as the candidate
             if (majority == 0) {
                 res = n;
             }
+            // Increment or decrement the majority count based on whether the current number matches the candidate
             majority += n == res ? 1 : -1;
         }
+
+        // After finishing the loop, res will contain the majority element
         return res;
     }
 }
+
 
 
 
