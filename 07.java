@@ -91,44 +91,65 @@ class Solution {
 
 class Solution {
 
+    // Helper class to store sum of the pair and indices i, j of the pairs
     private static class Pair {
         int sum, i, j;
 
+        // Constructor to initialize the sum and indices
         public Pair(int sum, int i, int j) {
             this.sum = sum;
             this.i = i;
             this.j = j;
         }
     }
+
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         
+        // List to store the resulting pairs
         List<List<Integer>> pairs = new ArrayList<>();
+        
+        // Length of the first array (nums1)
         int listLength = nums1.length;
 
+        // Min-Heap (Priority Queue) to store the pairs with their sum, 
+        // ensuring the smallest sum pair is always at the top
         PriorityQueue<Pair> minHeap = new PriorityQueue<>((a, b) -> a.sum - b.sum);
 
+        // Insert the first k pairs from nums1 and the first element of nums2 into the min-heap
         for (int i = 0; i < Math.min(k, listLength); i++) {
             minHeap.add(new Pair(nums1[i] + nums2[0], i, 0));
         }
 
+        // Counter to keep track of the number of pairs we have processed
         int counter = 0;
+
+        // Process the min-heap to get the smallest sum pairs and build the result
         while (!minHeap.isEmpty() && counter < k) {
             
+            // Poll the smallest sum pair from the heap
             Pair pair = minHeap.poll();
-            int i = pair.i;
-            int j = pair.j;
+            int i = pair.i; // Get index of the element in nums1
+            int j = pair.j; // Get index of the element in nums2
 
+            // Add the current pair to the result list
             pairs.add(Arrays.asList(nums1[i], nums2[j]));
-            int nextElement = j + 1;
 
+            // If there is another element in nums2 for the current index i, 
+            // add the next pair (nums1[i], nums2[j + 1]) to the min-heap
+            int nextElement = j + 1;
             if (nums2.length > nextElement) {
                 minHeap.add(new Pair(nums1[i] + nums2[nextElement], i, nextElement));
             }
+
+            // Increment the counter to track the number of processed pairs
             counter++;
         }
+
+        // Return the final list of pairs
         return pairs;
     }
 }
+
 
 
 
