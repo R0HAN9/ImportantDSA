@@ -122,15 +122,23 @@ class Solution {
 class Solution {
     public int singleNumber(int[] nums) {
         
+        // n stores the length of the input array
         int n = nums.length;
+        
+        // c will hold the result (the number that appears only once)
         int c = 0;
 
+        // Loop through each element in the array
         for (int i = 0; i < n; i++) {
+            // Use the XOR operator to cancel out numbers that appear twice
             c = c ^ nums[i];
         }
+        
+        // After the loop, c will contain the single number (the one that appears only once)
         return c;
     }
 }
+
 
 
 
