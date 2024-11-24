@@ -144,18 +144,29 @@ class Solution {
 
 // 5. Reverse Linked List  
     
-    class Solution {
+class Solution {
     public ListNode reverseList(ListNode head) {
         
+        // node will be used to store the reversed linked list (initially null)
         ListNode node = null;
 
+        // Traverse through the linked list until we reach the end (head == null)
         while (head != null) {
+            // Temporarily store the next node
             ListNode temp = head.next;
+            
+            // Reverse the current node's link to point to the previous node (node)
             head.next = node;
+            
+            // Move the node pointer to the current node (this will be the new "previous" node)
             node = head;
+            
+            // Move to the next node in the original list
             head = temp;
         }
 
+        // After the loop, node points to the new head of the reversed list
         return node;
     }
 }
+
