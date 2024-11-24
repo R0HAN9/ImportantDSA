@@ -48,21 +48,26 @@ class Solution {
 
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
+        
+        // Step 1: Count the frequency of each element using a HashMap
         Map<Integer, Integer> counter = new HashMap<>();
         for (int n : nums) {
             counter.put(n, counter.getOrDefault(n, 0) + 1);
         }
         
+        // Step 2: Create an array of lists, where index represents frequency
         List<Integer>[] freq = new ArrayList[nums.length + 1];
         for (int i = 0; i < freq.length; i++) {
             freq[i] = new ArrayList<>();
         }
         
+        // Step 3: Populate the frequency array with elements
         for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
             int frequency = entry.getValue();
             freq[frequency].add(entry.getKey());
         }
         
+        // Step 4: Extract the top k frequent elements
         int[] res = new int[k];
         int idx = 0;
         for (int i = freq.length - 1; i >= 0; i--) {
@@ -74,9 +79,11 @@ class Solution {
             }
         }
         
+        // Step 5: Return an empty array in case something goes wrong (shouldn't happen in this problem)
         return new int[0];        
     }
 }
+
 
 
 
