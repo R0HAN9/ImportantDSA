@@ -3,32 +3,44 @@
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         
-        int main_max = Integer.MIN_VALUE;
-        HashMap<Integer,Integer> hm = new HashMap<>();
+        // Step 1: Initialize variables
+        int main_max = Integer.MIN_VALUE;  // To track the largest element seen
+        HashMap<Integer,Integer> hm = new HashMap<>();  // A map to store element frequencies
         
-        for(int i=0;i<nums.length;i++){
+        // Step 2: Count frequencies of each number and track the maximum element
+        for(int i = 0; i < nums.length; i++){
+            // If the element is already in the map, increment its count
             if(hm.containsKey(nums[i])){
-                hm.put(nums[i],hm.get(nums[i]) +1);
-            } else{
-                hm.put(nums[i],1);
+                hm.put(nums[i], hm.get(nums[i]) + 1);
+            } else {
+                // Otherwise, add it with a count of 1
+                hm.put(nums[i], 1);
             }
-            main_max = Math.max(main_max,nums[i]);
+            // Track the maximum element encountered so far
+            main_max = Math.max(main_max, nums[i]);
         }
         
-        if(hm.size()==1){
+        // Step 3: If there's only one unique element in the array, return it
+        if(hm.size() == 1){
             return main_max;
         }
         
-        k -= hm.get(main_max);
-        while(k>0){
-            main_max--;
+        // Step 4: Adjust k to account for occurrences of the largest element
+        k -= hm.get(main_max);  // Subtract occurrences of the largest element
+        
+        // Step 5: Find the (k-th largest) element
+        while(k > 0){
+            main_max--;  // Decrease the value to check for the next largest element
             if(hm.containsKey(main_max)){
-                k -= hm.get(main_max);
+                k -= hm.get(main_max);  // If we find this element, decrease k by its frequency
             }
         }
+        
+        // Step 6: Return the k-th largest element
         return main_max;
     }
 }
+
 
 
 
