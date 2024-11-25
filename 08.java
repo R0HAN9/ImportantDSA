@@ -133,18 +133,26 @@ class Solution {
 // 5. Diameter of Binary Tree
 
 class Solution {
-    int maxx = 0;
+    int maxx = 0; // Variable to store the maximum diameter of the binary tree
+    
     public int diameterOfBinaryTree(TreeNode root) {
-        maxDepth(root);
-        return maxx;
+        maxDepth(root); // Call maxDepth to calculate the diameter
+        return maxx; // Return the maximum diameter
     }
+
     public int maxDepth(TreeNode root) {
         if (root == null) {
-            return 0;
+            return 0; // Base case: if the node is null, return depth 0
         }
-        int leftd = maxDepth(root.left);
-        int rightd = maxDepth(root.right); 
-        maxx = Math.max(maxx,leftd+rightd);
-        return Math.max(leftd,rightd)+1;
+        
+        // Recursively find the depth of the left and right subtrees
+        int leftd = maxDepth(root.left); // Depth of the left subtree
+        int rightd = maxDepth(root.right); // Depth of the right subtree
+        
+        // Calculate the diameter at this node: sum of left and right depths
+        maxx = Math.max(maxx, leftd + rightd); // Update the maximum diameter
+        
+        // Return the maximum depth of the current node's subtrees + 1 for the current node
+        return Math.max(leftd, rightd) + 1;
     }
 }
