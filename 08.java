@@ -2,26 +2,36 @@
 
 class Solution {
     public int[][] merge(int[][] intervals) {
+        // Step 1: Sort the intervals based on their start times.
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
+        // Step 2: Initialize a list to store merged intervals and set the first interval as the previous interval.
         List<int[]> merged = new ArrayList<>();
         int[] prev = intervals[0];
 
+        // Step 3: Iterate through the intervals starting from the second one.
         for (int i = 1; i < intervals.length; i++) {
-            int[] interval = intervals[i];
+            int[] interval = intervals[i]; // Current interval being processed.
+
+            // Check if the current interval overlaps with the previous one.
             if (interval[0] <= prev[1]) {
+                // If they overlap, merge them by updating the end of the previous interval.
                 prev[1] = Math.max(prev[1], interval[1]);
             } else {
+                // If they don't overlap, add the previous interval to the list and update the previous interval.
                 merged.add(prev);
                 prev = interval;
             }
         }
 
+        // Step 4: Add the last processed interval to the merged list.
         merged.add(prev);
 
+        // Step 5: Convert the list to a 2D array and return the result.
         return merged.toArray(new int[merged.size()][]);         
     }
 }
+
 
 
 
