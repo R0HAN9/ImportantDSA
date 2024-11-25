@@ -81,22 +81,31 @@ class Solution {
 
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {
-        int res = 0;
+        int res = 0; // Counter for the number of intervals to remove
 
+        // Step 1: Sort intervals by their end times (greedy approach)
         Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
+
+        // Step 2: Initialize `prev_end` to track the end time of the last non-overlapping interval
         int prev_end = intervals[0][1];
 
+        // Step 3: Iterate through the intervals starting from the second one
         for (int i = 1; i < intervals.length; i++) {
+            // Check if the current interval overlaps with the previous interval
             if (prev_end > intervals[i][0]) {
+                // If they overlap, increment the count of intervals to remove
                 res++;
             } else {
+                // If no overlap, update `prev_end` to the end of the current interval
                 prev_end = intervals[i][1];
             }
         }
 
+        // Step 4: Return the total count of intervals to remove
         return res;        
     }
 }
+
 
 
 
