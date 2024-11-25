@@ -113,16 +113,21 @@ class Solution {
 
 class Solution {
     public void reverseString(char[] s) {
-        int left = 0, right = s.length - 1;
+        int left = 0; // Pointer to the beginning of the array
+        int right = s.length - 1; // Pointer to the end of the array
+        
+        // Step 1: Swap characters from left and right until the pointers meet
         while (left < right) {
-            char temp = s[left];
-            s[left] = s[right];
-            s[right] = temp;
-            left++;
-            right--;
+            char temp = s[left]; // Store the character at the left pointer
+            s[left] = s[right]; // Swap the character at the left with the character at the right
+            s[right] = temp; // Assign the character from the left pointer to the right
+            
+            left++; // Move the left pointer towards the right
+            right--; // Move the right pointer towards the left
         }
     }
 }
+
 
 
 // 5. Diameter of Binary Tree
