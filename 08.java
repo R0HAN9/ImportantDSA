@@ -39,31 +39,40 @@ class Solution {
 
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        int i = 0;
-        int n = intervals.length;
-        List<int[]> result = new ArrayList<>();
+        int i = 0; // Index to iterate through intervals
+        int n = intervals.length; // Total number of intervals
+        List<int[]> result = new ArrayList<>(); // List to store the resulting intervals
         
+        // Step 1: Add all intervals that come before the new interval (no overlap)
         while (i < intervals.length) {
-            if (intervals[i][1] < newInterval[0])
-                result.add(intervals[i]);
-            else if (intervals[i][0] > newInterval[1]){
-                break;
+            if (intervals[i][1] < newInterval[0]) { // Current interval ends before the new interval starts
+                result.add(intervals[i]); // Add the current interval to the result
             } else {
-                //Overlap : merge them
-                newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
-                newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+                break; // Found an overlap or the position for the new interval
             }
             i++;
         }
         
+        // Step 2: Merge overlapping intervals with the new interval
+        while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+            // Update the new interval's start and end to include the overlap
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        // Add the merged new interval to the result
         result.add(newInterval);
-        while (i < n){
-            result.add(intervals[i++]);
+        
+        // Step 3: Add all intervals that come after the new interval (no overlap)
+        while (i < n) {
+            result.add(intervals[i++]); // Add remaining intervals to the result
         }
         
+        // Convert the result list to a 2D array and return
         return result.toArray(new int[result.size()][2]);
     }
 }
+
 
 
 
