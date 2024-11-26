@@ -96,22 +96,36 @@ class Solution {
 
 class Solution {
 
+    // Helper function to calculate the maximum path sum, returning the maximum sum from the root to any node
     private int findMaxPathSum(TreeNode root, int[] maximum) {
-
+        // Base case: if the node is null, return 0 (no contribution to the sum)
         if (root == null) return 0;
+
+        // Recursively compute the maximum path sum of the left and right subtrees
+        // We use Math.max(0, ...) to ignore negative path sums, as they wouldn't contribute positively
         int leftSum = Math.max(0, findMaxPathSum(root.left, maximum));
         int rightSum = Math.max(0, findMaxPathSum(root.right, maximum));
 
+        // Update the global maximum path sum if the sum of the current node and both left and right children is greater
         maximum[0] = Math.max(maximum[0], leftSum + rightSum + root.val);
+
+        // Return the maximum path sum that can be obtained starting from the current node and going downwards
+        // This would be either the path going through the left or right subtree (whichever is greater)
         return root.val + Math.max(leftSum, rightSum); 
     }
 
+    // Main function to calculate the maximum path sum of the tree
     public int maxPathSum(TreeNode root) {
-        
+        // Array to store the global maximum path sum (updated during the traversal)
         int[] maximum = new int[1];
+        // Initialize the global maximum with the smallest possible integer value
         maximum[0] = Integer.MIN_VALUE;
+
+        // Call the helper function to calculate the path sum
         findMaxPathSum(root, maximum);
 
+        // Return the global maximum path sum
         return maximum[0];
     }
 }
+
