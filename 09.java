@@ -2,32 +2,42 @@
 
 class Solution {
     public int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
+        int left = 0; // Initialize the left pointer
+        int right = nums.length - 1; // Initialize the right pointer
 
+        // Perform binary search
         while (left <= right) {
+            // Calculate the middle index
             int mid = (left + right) / 2;
 
+            // Check if the middle element is the target
             if (nums[mid] == target) {
-                return mid;
-            } else if (nums[mid] >= nums[left]) {
+                return mid; // Target found, return its index
+            }
+            
+            // Determine which part of the array is sorted
+            if (nums[mid] >= nums[left]) { // Left part is sorted
+                // Check if the target lies within the sorted left part
                 if (nums[left] <= target && target <= nums[mid]) {
-                    right = mid - 1;
+                    right = mid - 1; // Narrow down to the left part
                 } else {
-                    left = mid + 1;
+                    left = mid + 1; // Narrow down to the right part
                 }
-            } else {
+            } else { // Right part is sorted
+                // Check if the target lies within the sorted right part
                 if (nums[mid] <= target && target <= nums[right]) {
-                    left = mid + 1;
+                    left = mid + 1; // Narrow down to the right part
                 } else {
-                    right = mid - 1;
+                    right = mid - 1; // Narrow down to the left part
                 }
             }
         }
 
+        // If we exit the loop, the target is not in the array
         return -1;        
     }
 }
+
 
 
 
