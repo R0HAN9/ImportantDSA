@@ -85,20 +85,36 @@ class Solution {
 
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        
-        int n = matrix.length;
-        int m = matrix[0].length;
+        // Get the dimensions of the matrix
+        int n = matrix.length;     // Number of rows
+        int m = matrix[0].length;  // Number of columns
+
+        // Start from the top-right corner of the matrix
         int row = 0, col = m - 1;
 
+        // Traverse the matrix while staying within its bounds
         while (row < n && col >= 0) {
-            if (matrix[row][col] == target) return true;
-
-            else if (matrix[row][col] < target) row++;
-            else col--;
+            // If the target is found, return true
+            if (matrix[row][col] == target) {
+                return true;
+            } 
+            // If the current element is less than the target,
+            // move down to the next row
+            else if (matrix[row][col] < target) {
+                row++;
+            } 
+            // If the current element is greater than the target,
+            // move left to the previous column
+            else {
+                col--;
+            }
         }
+
+        // If the loop ends without finding the target, return false
         return false;
     }
 }
+
 
 
 
