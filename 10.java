@@ -1,33 +1,50 @@
 // 1. PreOrder → Binary Tree Paths 
 
 class Solution {
-    public List<String> binaryTreePaths(TreeNode root) {
-        
-        List<String> result = new ArrayList<>();
-        dfs(root, new StringBuilder(), result);
-        return result;
 
-    }
-    private void dfs(TreeNode node, StringBuilder path, List<String> result) {
-        if (node == null) return;
-        int len = path.length();
+    // Main method to return all root-to-leaf paths in the binary tree
+    public List<String> binaryTreePaths(TreeNode root) {
+        // List to store the final result
+        List<String> result = new ArrayList<>();
         
+        // Perform Depth-First Search (DFS) to find all paths
+        dfs(root, new StringBuilder(), result);
+        
+        // Return the collected paths
+        return result;
+    }
+
+    // Helper function to perform DFS and construct paths
+    private void dfs(TreeNode node, StringBuilder path, List<String> result) {
+        // Base case: If the node is null, return (end of a path)
+        if (node == null) return;
+
+        // Store the current length of the path (used to backtrack later)
+        int len = path.length();
+
+        // Append "->" if this is not the first node in the path
         if (len > 0) {
             path.append("->");
         }
 
+        // Append the current node's value to the path
         path.append(node.val);
+
+        // If the current node is a leaf (no left or right child)
         if (node.left == null && node.right == null) {
+            // Add the constructed path to the result list
             result.add(path.toString());
-        }
-        else {
+        } else {
+            // Recursively traverse the left and right children
             dfs(node.left, path, result);
             dfs(node.right, path, result);
         }
 
+        // Backtrack: Restore the path to its previous state
         path.setLength(len);
     }
 }
+
 
 
 
