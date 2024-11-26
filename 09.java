@@ -154,20 +154,35 @@ class Solution {
 
 class Solution {
 
+    // Recursive helper function to build the BST from a sorted array
     private TreeNode helper(int[] nums, int startIdx, int endIdx) {
-
+        // Base case: If the start index exceeds the end index, return null
         if (startIdx > endIdx) return null;
+
+        // Calculate the middle index to select the root of the current subtree
         int mid = startIdx + (endIdx - startIdx) / 2;
+
+        // Create a new TreeNode with the value at the middle index
         TreeNode node = new TreeNode(nums[mid]);
 
+        // Recursively build the left subtree using the left part of the array
         node.left = helper(nums, startIdx, mid - 1);
+
+        // Recursively build the right subtree using the right part of the array
         node.right = helper(nums, mid + 1, endIdx);
+
+        // Return the constructed node
         return node;
     }
 
+    // Main function to convert a sorted array to a height-balanced BST
     public TreeNode sortedArrayToBST(int[] nums) {
+        // Edge case: If the array is empty, return null
         int n = nums.length;
         if (n == 0) return null;
+
+        // Call the helper function with the full range of the array
         return helper(nums, 0, n - 1);
     }
 }
+
