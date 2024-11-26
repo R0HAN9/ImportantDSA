@@ -45,26 +45,39 @@ class Solution {
 
 class Solution {
     public int findMin(int[] nums) {
-        
+        // Get the length of the array
         int len = nums.length;
+
+        // Define the start and end pointers
         int startIdx = 0;
         int endIdx = len - 1;
+
+        // Initialize the answer with a maximum possible value
         int ans = Integer.MAX_VALUE;
 
+        // Binary search to find the minimum value
         while (startIdx <= endIdx) {
+            // Calculate the middle index
             int mid = startIdx + (endIdx - startIdx) / 2;
 
+            // Check if the mid element is greater than the last element in the range
+            // This indicates the minimum is in the right part of the array
             if (nums[mid] > nums[endIdx]) {
-                startIdx = mid + 1;
-            }
+                startIdx = mid + 1; // Narrow the search to the right side
+            } 
+            // If the mid element is less than or equal to the last element
+            // This indicates the minimum could be at mid or in the left part
             else if (nums[mid] <= nums[endIdx]) {
-                ans = Math.min(ans, nums[mid]);
-                endIdx = mid - 1;
+                ans = Math.min(ans, nums[mid]); // Update the minimum answer
+                endIdx = mid - 1; // Narrow the search to the left side
             }
         }
+
+        // Return the minimum value found
         return ans;
     }
 }
+
 
 
 
