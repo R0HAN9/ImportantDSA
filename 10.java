@@ -51,29 +51,44 @@ class Solution {
 // 2. InOrder → Kth Smallest Element in a BST 
 
 class Solution {
+
+    // Main method to return the kth smallest element in the BST
     public int kthSmallest(TreeNode root, int k) {
-        
+        // An array to keep track of the count of nodes visited during the in-order traversal
         int[] count = new int[]{0};
+        
+        // An array to store the kth smallest element
         int[] kthSmallest = new int[] {Integer.MIN_VALUE};
 
+        // Perform in-order traversal to find the kth smallest element
         inOrderHelper(root, count, k, kthSmallest);
+        
+        // Return the kth smallest element found
         return kthSmallest[0];
-
     }
+
+    // Helper function to perform in-order traversal and find the kth smallest element
     public void inOrderHelper(TreeNode root, int[] count, int k, int[] kthSmallest) {
+        // Base case: If the node is null or we've already found the kth smallest element
         if (root == null || count[0] >= k) return;
 
+        // Traverse the left subtree first (in-order traversal)
         inOrderHelper(root.left, count, k, kthSmallest);
+
+        // Increment the count of nodes visited
         count[0]++;
 
+        // If we've visited the kth node, store its value as the kth smallest element
         if (count[0] == k) {
             kthSmallest[0] = root.val;
-            return;
-        } 
+            return;  // We found the kth smallest, no need to continue
+        }
 
+        // Traverse the right subtree
         inOrderHelper(root.right, count, k, kthSmallest);
     }
 }
+
 
 
 
