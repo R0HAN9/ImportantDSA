@@ -122,24 +122,31 @@ class Solution {
 
 class Solution {
     public ListNode middleNode(ListNode head) {
-        
+        // Base case: If the list is empty or has only one node, return the head
         if (head == null || head.next == null) 
             return head;
 
+        // Initialize two pointers: 
+        // 'slow' moves one step at a time, and 'fast' moves two steps at a time
         ListNode fast = head;
         ListNode slow = head;
 
+        // Traverse the list until the 'fast' pointer reaches the end
         while (fast != null) {
-            fast = fast.next;
+            fast = fast.next; // Move 'fast' one step
 
+            // Check if 'fast' can move one more step
             if (fast != null) {
-                fast = fast.next;
-                slow = slow.next;
+                fast = fast.next; // Move 'fast' a second step
+                slow = slow.next; // Move 'slow' one step
             }
         }
+
+        // When 'fast' reaches the end, 'slow' will be at the middle node
         return slow;
     }
 }
+
 
 
 
