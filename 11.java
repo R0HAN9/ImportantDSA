@@ -3,32 +3,47 @@
 class Solution {
     public Node cloneGraph(Node node) {
 
+        // Base case: If the input node is null, return null (empty graph)
         if (node == null) {
             return null;
         }
 
+        // A HashMap to store the mapping between original nodes and their clones
         HashMap<Node, Node> visited = new HashMap<>();
+
+        // Queue to perform BFS (Breadth-First Search) for graph traversal
         Queue<Node> queue = new LinkedList<>();
 
+        // Create the clone of the input node and put it into the visited map
         visited.put(node, new Node(node.val));
+
+        // Start BFS by adding the input node to the queue
         queue.offer(node);
 
+        // BFS loop to visit all nodes and their neighbors
         while (!queue.isEmpty()) {
+            // Pop a node from the queue to process
             Node currentNode = queue.poll();
 
+            // Iterate through all the neighbors of the current node
             for (Node neighbor : currentNode.neighbors) {
-                if (!visited.containsKey(neighbor)) {
 
+                // If the neighbor is not visited, create a clone of the neighbor
+                if (!visited.containsKey(neighbor)) {
                     visited.put(neighbor, new Node(neighbor.val));
-                    queue.offer(neighbor);
+                    queue.offer(neighbor);  // Add the neighbor to the queue for later processing
                 }
 
+                // Add the clone of the neighbor to the neighbors list of the current node's clone
                 visited.get(currentNode).neighbors.add(visited.get(neighbor));
             }
         }
+
+        // Return the clone of the original node (entry point)
         return visited.get(node);
     }
 }
+
 
 // 2. Path Sum II
 
