@@ -53,59 +53,81 @@ class Solution {
 class Solution {
     public int orangesRotting(int[][] grid) {
         
-        int m = grid.length;
-        int n = grid[0].length;
+        // Get the dimensions of the grid
+        int m = grid.length;  // Number of rows
+        int n = grid[0].length;  // Number of columns
+        
+        // To track visited cells, we can directly use the grid itself as it already has the status of each orange.
         int[][] visited = grid;
 
+        // Queue to perform BFS (Breadth-First Search), stores coordinates of rotten oranges
         Queue<int[]> queue = new LinkedList<>();
+        // Count of fresh oranges that still need to rot
         int countFreshOrange = 0;
 
+        // Traverse the grid to find all rotten oranges and count fresh oranges
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (visited[i][j] == 2) {
+                if (visited[i][j] == 2) {  // Rotten orange found, add it to the queue
                     queue.offer(new int[] {i, j});
                 }
-                if (visited[i][j] == 1) {
+                if (visited[i][j] == 1) {  // Fresh orange found, increment the fresh orange counter
                     countFreshOrange++;
                 }
             }
         }
+
+        // If no fresh oranges exist, no time is needed, return 0
         if (countFreshOrange == 0) return 0;
+
+        // If there are fresh oranges but no rotten oranges to start the process, return -1
         if (queue.isEmpty()) return -1;
 
+        // Minutes variable to track the time taken to rot all fresh oranges
         int minutes = -1;
-        int[][] dirs = {{1,0}, {-1,0}, {0,-1}, {0,1}};
 
+        // Directions array to check the four possible directions (up, down, left, right)
+        int[][] dirs = {{1, 0}, {-1, 0}, {0, -1}, {0, 1}};
+
+        // Perform BFS to rot the fresh oranges
         while (!queue.isEmpty()) {
+            // Get the number of rotten oranges at the current level (minutes)
             int size = queue.size();
 
+            // Process all rotten oranges at the current level
             while (size-- > 0) {
-                int[] cell = queue.poll();
+                int[] cell = queue.poll();  // Get the next rotten orange's coordinates
 
                 int x = cell[0];
                 int y = cell[1];
 
+                // Check all 4 possible directions around the current rotten orange
                 for (int[] dir : dirs) {
-                    int i = x + dir[0];
-                    int j = y + dir[1];
+                    int i = x + dir[0];  // New row coordinate
+                    int j = y + dir[1];  // New column coordinate
 
-                    if (i >= 0 && i < m && j >= 0 && j <n && visited[i][j] == 1) {
-                        visited[i][j] = 2;
-                        countFreshOrange--;
-                        queue.offer(new int[] {i, j});
+                    // Ensure the new coordinates are within the grid bounds and the orange is fresh (1)
+                    if (i >= 0 && i < m && j >= 0 && j < n && visited[i][j] == 1) {
+                        visited[i][j] = 2;  // Make the fresh orange rotten
+                        countFreshOrange--;  // Decrease the count of fresh oranges
+                        queue.offer(new int[] {i, j});  // Add this new rotten orange to the queue
                     }
                 }
             }
+            // Increment the minutes after processing one level of BFS
             minutes++;
         }
 
+        // If there are no fresh oranges left, return the time taken (minutes)
         if (countFreshOrange == 0) {
             return minutes;
         }
 
+        // If there are still fresh oranges left, return -1 (not all oranges can rot)
         return -1;
     }
 }
+
 
 // 3. Word Ladder
 
