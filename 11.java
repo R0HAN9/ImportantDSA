@@ -162,22 +162,34 @@ class Solution {
 
 
 class Solution {
+    
+    // Main function to check if the tree is symmetric
     public boolean isSymmetric(TreeNode root) {
+        // A tree is symmetric if the left subtree is a mirror image of the right subtree
         return isMirror(root.left, root.right);
     }
-    
+
+    // Helper function to check if two subtrees are mirror images of each other
     private boolean isMirror(TreeNode n1, TreeNode n2) {
+        // If both nodes are null, they are symmetric (empty trees are symmetric)
         if (n1 == null && n2 == null) {
             return true;
         }
         
+        // If only one of the nodes is null, they are not symmetric
         if (n1 == null || n2 == null) {
             return false;
         }
         
-        return n1.val == n2.val && isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
+        // Check if the current nodes are the same and recursively check their subtrees
+        // The left subtree of n1 should be a mirror of the right subtree of n2
+        // and the right subtree of n1 should be a mirror of the left subtree of n2
+        return n1.val == n2.val &&
+               isMirror(n1.left, n2.right) && // Check left of n1 with right of n2
+               isMirror(n1.right, n2.left);   // Check right of n1 with left of n2
     }
 }
+
 
 // 5. Product of Array Except Self
 
