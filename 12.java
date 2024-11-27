@@ -228,17 +228,30 @@ class Solution {
 class Solution {
     public int rob(int[] nums) {
         
+        // Get the number of houses
         int n = nums.length;
+
+        // If there is only one house, return its value
         if (n == 1) return nums[0];
 
+        // dp[i] will store the maximum amount of money that can be robbed from the first i+1 houses
         int[] dp = new int[n];
+
+        // Initialize the first two houses:
+        // dp[0] is just the money from the first house
         dp[0] = nums[0];
+        // dp[1] is the maximum of either robbing the first house or the second house
         dp[1] = Math.max(nums[0], nums[1]);
 
+        // For each subsequent house, decide whether to rob the current house or not
         for (int i = 2; i < n; i++) {
+            // If we rob the current house, we can't rob the previous house (dp[i-2] + nums[i])
+            // If we don't rob the current house, we take the maximum amount up to the previous house (dp[i-1])
             dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
         }
 
+        // The last entry in the dp array will contain the maximum amount we can rob
         return dp[n - 1];
     }
 }
+
