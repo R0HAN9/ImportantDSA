@@ -196,23 +196,31 @@ class Solution {
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         
+        // Initialize an output array to store the result.
+        // Each element in output will eventually hold the product of all elements except itself.
         int[] output = new int[nums.length];
+        
+        // Initialize the output array with 1, as we will be multiplying the elements later.
         for (int i = 0; i < nums.length; i++) {
             output[i] = 1;
         }
 
-        int left = 1;
+        // Compute the product of all elements to the left of each index.
+        int left = 1; // Variable to track the product of elements to the left.
         for (int i = 0; i < nums.length; i++) {
-            output[i] *= left;
-            left *= nums[i];
+            output[i] *= left; // Multiply the current value of output[i] with the product of elements to the left.
+            left *= nums[i]; // Update left to include the current element nums[i] for the next iteration.
         }
 
-        int right = 1;
+        // Compute the product of all elements to the right of each index.
+        int right = 1; // Variable to track the product of elements to the right.
         for (int i = nums.length - 1; i >= 0; i--) {
-            output[i] *= right;
-            right *= nums[i];
+            output[i] *= right; // Multiply the current value of output[i] with the product of elements to the right.
+            right *= nums[i]; // Update right to include the current element nums[i] for the next iteration.
         }
 
+        // The output array now contains the product of all elements except the one at each index.
         return output;
     }
 }
+
