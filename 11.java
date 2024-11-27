@@ -94,52 +94,68 @@ class Solution {
 
 class Solution {
     public int[] findOrder(int n, int[][] prerequisites) {
-        
+
+        // Step 1: Create an adjacency list to represent the graph
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
 
+        // Step 2: Fill the adjacency list based on the prerequisites array
+        // prerequisites[i] = [course, prerequisite]
         int m = prerequisites.length;
         for (int i = 0; i < m; i++) {
             adj.get(prerequisites[i][1]).add(prerequisites[i][0]);
         }
 
+        // Step 3: Calculate the indegree for each node (number of prerequisites for each course)
         int indegree[] = new int[n];
-        for (int i = 0; i <n; i++) {
+        for (int i = 0; i < n; i++) {
             for (int it : adj.get(i)) {
                 indegree[it]++;
             }
         }
 
-        Queue<Integer> q = new LinkedList<Integer>();
+        // Step 4: Initialize a queue to perform topological sorting (using Kahn's algorithm)
+        Queue<Integer> q = new LinkedList<>();
+        
+        // Step 5: Add nodes with no prerequisites (indegree == 0) to the queue
         for (int i = 0; i < n; i++) {
             if (indegree[i] == 0) {
                 q.add(i);
             }
         }
 
+        // Step 6: Perform BFS to generate the topological order
         int topo[] = new int[n];
         int index = 0;
 
         while (!q.isEmpty()) {
-            int node = q.peek();
+            int node = q.peek();  // Get the node with no prerequisites
 
-            q.remove();
-            topo[index++] = node;
+            q.remove();           // Remove it from the queue
+            topo[index++] = node; // Add it to the topological order array
 
+            // Step 7: Decrease the indegree of neighbors (courses dependent on the current course)
+            // If a neighbor's indegree becomes 0, add it to the queue
             for (int it : adj.get(node)) {
                 indegree[it]--;
 
+                // If this neighbor has no remaining prerequisites, add it to the queue
                 if (indegree[it] == 0) q.add(it);
             }
         }
 
+        // Step 8: If all courses are added to the topological order, return it
+        // If not, there is a cycle, and we cannot finish all courses
         if (index == n) return topo;
+
+        // If there is a cycle (some courses couldn't be completed), return an empty array
         int[] arr = {};
         return arr;
     }
 }
+
 
 
 // 4. Symmetric Tree
