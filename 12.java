@@ -134,10 +134,14 @@ class Solution {
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
 
+        // Convert the word list to a set for quick lookups
         Set<String> wordSet = new HashSet<>();
         Boolean isPresent = false;
 
+        // Add all words from the wordList into the set for efficient checking
         wordSet.addAll(wordList);
+
+        // Check if the endWord is present in the wordSet; if not, return 0
         for (String currWord : wordList) {
             if (endWord.equals(currWord)) {
                 isPresent = true;
@@ -145,43 +149,63 @@ class Solution {
             }
         }
 
+        // If the endWord is not in the wordList, no valid transformation exists
         if (!isPresent)
             return 0;
-        Queue<String> wordQueue = new LinkedList<>();
 
+        // Queue to perform BFS
+        Queue<String> wordQueue = new LinkedList<>();
+        
+        // Start with the beginWord
         wordQueue.add(beginWord);
+        // Initialize distance as 0
         int distance = 0;
 
+        // Perform BFS to find the shortest transformation sequence
         while (!wordQueue.isEmpty()) {
+            // Get the number of words at the current level (i.e., all words at the same distance)
             int size = wordQueue.size();
+            // Increment the distance for the current level
             distance++;
 
+            // Process all words at the current level
             while (size-- != 0) {
-                String currWord = wordQueue.poll();
-
+                String currWord = wordQueue.poll();  // Get the current word to transform
+                
+                // Try all possible transformations of the current word
                 for (int i = 0; i < currWord.length(); i++) {
-                    char[] temp = currWord.toCharArray();
+                    char[] temp = currWord.toCharArray();  // Convert word to char array for modification
 
+                    // Replace each character with every letter from 'a' to 'z'
                     for (char j = 'a'; j <= 'z'; j++) {
-                        temp[i] = j;
+                        temp[i] = j;  // Modify the i-th character
 
+                        // Convert char array back to string
                         String newWord = new String(temp);
 
+                        // If the new word is the endWord, return the current distance + 1 (since it's the last step)
                         if (newWord.equals(endWord))
                             return distance + 1;
+
+                        // If the new word is in the word set, add it to the queue for further processing
                         if (wordSet.contains(newWord)) {
                             wordQueue.add(newWord);
+                            // Remove the new word from the set to avoid revisiting it
                             wordSet.remove(newWord);
 
+                            // Optional: Print the newly generated word for debugging
                             System.out.println(newWord);
                         }
                     }
                 }
             }
         }
+
+        // If we finish the BFS without finding the endWord, return 0 (no valid transformation)
         return 0;
     }
 }
+
 
 // 4. Best Time to Buy and Sell Stock II
 
