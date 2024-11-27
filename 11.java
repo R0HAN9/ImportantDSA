@@ -49,27 +49,46 @@ class Solution {
 
 class Solution {
 
+    // List to store all the paths that sum up to the target value
     List<List<Integer>> answer = new ArrayList<List<Integer>>();
 
+    // Helper function for DFS traversal of the tree
     private void dfs(TreeNode node, List<Integer> path, int remainingSum) {
 
+        // Base case: If the node is null, return (no path exists here)
         if (node == null) return;
+
+        // Add the current node's value to the path
         path.add(node.val);
 
-        if (node.left == null && node.right == null && remainingSum == node.val) answer.add(new ArrayList<>(path));
+        // If it's a leaf node (no left or right child) and the remaining sum equals the node's value
+        // Then we've found a valid path, so add it to the answer list
+        if (node.left == null && node.right == null && remainingSum == node.val) {
+            answer.add(new ArrayList<>(path));  // Add a copy of the current path to the answer
+        }
+
+        // Recursively traverse the left and right children, updating the remaining sum
         this.dfs(node.left, path, remainingSum - node.val);
         this.dfs(node.right, path, remainingSum - node.val);
 
+        // Backtrack: Remove the current node's value from the path before returning to the parent node
         path.remove(path.size() - 1);
     }
 
+    // Main function that initializes the DFS process and returns the result
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         
+        // Initialize an empty list to store the current path during DFS
         List<Integer> path = new ArrayList<Integer>();
+        
+        // Start DFS from the root with the initial target sum
         dfs(root, path, targetSum);
+        
+        // Return all the valid paths that sum to the target value
         return answer;
     }
 }
+
 
 // 3. Course Schedule II
 
