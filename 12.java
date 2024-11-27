@@ -3,33 +3,50 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         
+        // Initialize a queue to facilitate level order traversal using BFS.
         Queue<TreeNode> queue = new LinkedList<>();
+        // List to store the final result, each inner list will contain values of nodes at each level.
         List<List<Integer>> finalAns = new ArrayList<List<Integer>>();
 
+        // If the root is null, return an empty list.
         if (root == null) return finalAns;
+        
+        // Start the BFS by adding the root node to the queue.
         queue.add(root);
 
+        // Perform BFS until the queue is empty.
         while (!queue.isEmpty()) {
+            // Get the number of nodes at the current level (all nodes at the current depth).
             int levels = queue.size();
 
+            // A temporary list to hold the values of nodes at the current level.
             List<Integer> subLevels = new ArrayList<>();
+            // Process all nodes at the current level.
             for (int i = 0; i < levels; i++) {
                 
+                // Check and add the left child of the current node, if it exists.
                 if (queue.peek().left != null) {
                     queue.add(queue.peek().left);
                 }
+                
+                // Check and add the right child of the current node, if it exists.
                 if (queue.peek().right != null) {
                     queue.add(queue.peek().right);
                 }
 
+                // Remove the current node from the queue and add its value to the subList for the current level.
                 subLevels.add(queue.remove().val);
             }
 
+            // Add the list of nodes at the current level to the final answer.
             finalAns.add(subLevels);
         }
+
+        // Return the final result containing lists of nodes grouped by levels.
         return finalAns;
     }
 }
+
 
 // 2. Rotting Oranges 
 
