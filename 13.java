@@ -192,14 +192,20 @@ class Solution {
 
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        // Start the recursive check with the entire valid range for the root node
         return valid(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
     private boolean valid(TreeNode node, long minimum, long maximum) {
+        // Base case: If the node is null, it is a valid BST by definition
         if (node == null) return true;
 
+        // Check if the current node's value is within the valid range
         if (!(node.val > minimum && node.val < maximum)) return false;
 
+        // Recursively check the left subtree (values must be less than the current node's value)
+        // and the right subtree (values must be greater than the current node's value)
         return valid(node.left, minimum, node.val) && valid(node.right, node.val, maximum);
     }
 }
+
