@@ -2,26 +2,37 @@
 
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        
+        // Get the current color of the starting pixel
         int val = image[sr][sc];
+        
+        // Perform Depth-First Search (DFS) to fill the connected region
         dfs(image, sr, sc, val, newColor);
+        
+        // Return the modified image
         return image;
-
     }
+
     public void dfs(int[][] image, int i, int j, int val, int newColor) {
+        // Base condition to stop recursion:
+        // - Out of bounds (i or j is outside the image)
+        // - Pixel is already filled with the new color
+        // - Pixel color is not the target color (val)
         if (i < 0 || i >= image.length || j < 0 || j >= image[0].length || 
-        image[i][j] == newColor || image[i][j] != val) {
+            image[i][j] == newColor || image[i][j] != val) {
             return;
         }
 
+        // Fill the current pixel with the new color
         image[i][j] = newColor;
 
-        dfs(image, i-1, j, val, newColor);
-        dfs(image, i+1, j, val, newColor);
-        dfs(image, i, j-1, val, newColor);
-        dfs(image, i, j+1, val, newColor);
+        // Recursive calls to visit all 4 neighboring pixels (up, down, left, right)
+        dfs(image, i-1, j, val, newColor); // Move up
+        dfs(image, i+1, j, val, newColor); // Move down
+        dfs(image, i, j-1, val, newColor); // Move left
+        dfs(image, i, j+1, val, newColor); // Move right
     }
 }
+
 
 // 2. Number of Islands 
 
