@@ -36,40 +36,67 @@ class Solution {
 
 // 2. Number of Islands 
 
+import java.util.*;
+
 class Solution {
     public int numIslands(char[][] grid) {
         
+        // Variable to count the number of islands
         int island = 0;
+
+        // Get the number of rows and columns in the grid
         int rows = grid.length;
         int cols = grid[0].length;
+
+        // Set to track visited cells to avoid reprocessing
         Set<String> visited = new HashSet<>();
 
+        // Directions array for moving up, down, left, and right
         int[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
 
+        // Iterate over each cell in the grid
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
+                
+                // If the current cell is land ('1') and hasn't been visited yet
                 if (grid[r][c] == '1' && !visited.contains(r + "," + c)) {
+                    
+                    // Increment the island count
                     island++;
+                    
+                    // Perform BFS to mark all connected land cells as visited
                     bfs(grid, r, c, visited, directions, rows, cols);
                 }
             }
         }
+
+        // Return the total number of islands found
         return island;
     }
 
     private void bfs(char[][] grid, int r, int c, Set<String> visited, int[][] directions, int rows, int cols) {
+        // Queue for BFS traversal
         Queue<int[]> queue = new LinkedList<>();
+        
+        // Mark the starting cell as visited
         visited.add(r + "," + c);
+        
+        // Add the starting cell to the queue
         queue.add(new int[]{r, c});
 
+        // BFS traversal
         while (!queue.isEmpty()) {
+            // Dequeue the current cell
             int[] point = queue.poll();
             int row = point[0], col = point[1];
 
+            // Check all four directions (up, down, left, right)
             for (int[] direction : directions) {
                 int nr = row + direction[0], nc = col + direction[1];
 
+                // Check if the new cell is within bounds and is land ('1') and not visited
                 if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == '1' && !visited.contains(nr + "," + nc)) {
+                    // Add the new cell to the queue and mark it as visited
                     queue.add(new int[]{nr, nc});
                     visited.add(nr + "," + nc);
                 }
@@ -77,6 +104,7 @@ class Solution {
         }
     }
 }
+
 
 // 3. Surrounded Regions 
 
