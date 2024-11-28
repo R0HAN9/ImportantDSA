@@ -169,15 +169,23 @@ class Solution {
 class Solution {
     public int hammingWeight(int n) {
         
+        // Initialize result to store the number of 1 bits
         int result = 0;
+
+        // Loop through all 32 bits (since we're dealing with a 32-bit integer)
         for (int i = 0; i < 32; i++) {
+            // Shift the bits of n to the right by i positions and check the least significant bit (LSB)
+            // If the LSB is 1, increment the result
             if (((n >> i) & 1) == 1) {
                 result += 1;
             }
         }
+        
+        // Return the total number of 1 bits in the integer
         return result;
     }
 }
+
 
 // 5. Validate Binary Search Tree
 
