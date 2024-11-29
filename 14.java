@@ -216,13 +216,19 @@ class MinStack {
 class Solution {
     public boolean containsDuplicate(int[] nums) {
         
+        // Sort the array to bring duplicates next to each other
         Arrays.sort(nums);
 
+        // Iterate through the sorted array to check for duplicates
         for (int i = 1; i < nums.length; i++) {
+            // If the current element is equal to the previous one, a duplicate is found
             if (nums[i] == nums[i - 1]) {
-                return true;
+                return true; // Return true as we found a duplicate
             }
         }
+        
+        // If no duplicates were found, return false
         return false;
     }
 }
+
