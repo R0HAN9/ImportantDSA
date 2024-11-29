@@ -61,27 +61,38 @@ class Solution {
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         
+        // Result list to store all subsets
         List<List<Integer>> result = new ArrayList<>();
+        
+        // Temporary list to represent a current subset during recursion
         List<Integer> subset = new ArrayList<>();
 
+        // Start the recursive process to generate all subsets
         createSubset(nums, 0, result, subset);
+
+        // Return the final list of subsets
         return result;
     }
 
     private void createSubset(int[] nums, int index, List<List<Integer>> result, List<Integer> subset) {
 
+        // Base case: If the index has reached the end of the array, 
+        // add the current subset to the result and return
         if (index == nums.length) {
-            result.add(new ArrayList<>(subset));
+            result.add(new ArrayList<>(subset)); // Add a copy of the current subset
             return;
         }
 
-        subset.add(nums[index]);
-        createSubset(nums, index + 1, result, subset);
+        // **Include the current element in the subset**
+        subset.add(nums[index]); // Add the element at index to the current subset
+        createSubset(nums, index + 1, result, subset); // Recur for the next index
 
-        subset.remove(subset.size() - 1);
-        createSubset(nums, index + 1, result, subset);
+        // **Exclude the current element from the subset**
+        subset.remove(subset.size() - 1); // Remove the last added element
+        createSubset(nums, index + 1, result, subset); // Recur for the next index
     }
 }
+
 
 // 3. N-Queens
 
