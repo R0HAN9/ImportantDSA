@@ -167,35 +167,49 @@ class Solution {
 // 4. Min Stack
 
 class MinStack {
+    // List to store the stack elements along with the current minimum at each level
     private List<int[]> stack;
 
+    // Constructor to initialize the stack
     public MinStack() {
-        stack = new ArrayList<>();
+        stack = new ArrayList<>(); // Initialize the stack as an ArrayList
     }
     
+    // Push a value onto the stack
     public void push(int val) {
         
+        // If the stack is empty, the current minimum is the value itself
         int[] top = stack.isEmpty() ? new int[]{val, val} : stack.get(stack.size() - 1);
-        int minValue = top[1];
-        
-        if (minValue > val) {
+        int minValue = top[1]; // Get the current minimum value
+
+        // Update the current minimum if the new value is smaller
+        if (val < minValue) {
             minValue = val;
         }
+
+        // Add the value and the updated minimum to the stack
         stack.add(new int[]{val, minValue});
     }
     
+    // Remove the top element from the stack
     public void pop() {
+        // Remove the last element of the stack
         stack.remove(stack.size() - 1);
     }
     
+    // Get the top element of the stack
     public int top() {
+        // Return the top value if the stack is not empty, otherwise -1
         return stack.isEmpty() ? -1 : stack.get(stack.size() - 1)[0];
     }
     
+    // Get the minimum value in the stack
     public int getMin() {
+        // Return the minimum value if the stack is not empty, otherwise -1
         return stack.isEmpty() ? -1 : stack.get(stack.size() - 1)[1];
     }
 }
+
 
 // 5. Contains Duplicate 
 
