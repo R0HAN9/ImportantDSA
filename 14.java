@@ -59,117 +59,109 @@ class Solution {
 // 2. Subsets 
 
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        
-        // Result list to store all subsets
-        List<List<Integer>> result = new ArrayList<>();
-        
-        // Temporary list to represent a current subset during recursion
-        List<Integer> subset = new ArrayList<>();
-
-        // Start the recursive process to generate all subsets
-        createSubset(nums, 0, result, subset);
-
-        // Return the final list of subsets
-        return result;
-    }
-
-    private void createSubset(int[] nums, int index, List<List<Integer>> result, List<Integer> subset) {
-
-        // Base case: If the index has reached the end of the array, 
-        // add the current subset to the result and return
-        if (index == nums.length) {
-            result.add(new ArrayList<>(subset)); // Add a copy of the current subset
-            return;
-        }
-
-        // **Include the current element in the subset**
-        subset.add(nums[index]); // Add the element at index to the current subset
-        createSubset(nums, index + 1, result, subset); // Recur for the next index
-
-        // **Exclude the current element from the subset**
-        subset.remove(subset.size() - 1); // Remove the last added element
-        createSubset(nums, index + 1, result, subset); // Recur for the next index
-    }
-}
-
-
-// 3. N-Queens
-
-class Solution {
     public List<List<String>> solveNQueens(int n) {
         
+        // List to store all valid solutions
         List<List<String>> results = new ArrayList<>();
 
+        // Handle trivial cases:
+        // n = 1: Single queen can be placed in a 1x1 board
         if (n == 1) {
             List<String> solution = new ArrayList<>();
             solution.add("Q");
             results.add(solution);
             return results;
-
         }
+
+        // n = 2 and n = 3 have no solutions as queens can't be placed without attacking each other
         if (n == 2 || n == 3) return results;
 
+        // Initialize the `solution` array to keep track of queen positions
+        // solution[i] = column index of the queen in row `i`
         int[] solution = new int[n];
         for (int i = 0; i < n; i++) {
-            solution[i] = -1;
+            solution[i] = -1; // -1 indicates no queen is placed in that row yet
         }
 
+        // Start the recursive backtracking to find solutions
         solveNQueensRec(n, solution, 0, results);
         return results;
-        
     }
+
+    // Recursive function to place queens row by row
     private void solveNQueensRec(int n, int[] solution, int row, List<List<String>> results) {
 
+        // Base case: If all rows are filled, construct the solution string and add to results
         if (row == n) {
-
             List<String> solutionStr = constructSolutionString(solution);
             results.add(solutionStr);
             return;
         }
 
+        // Iterate through each column in the current row to try placing a queen
         for (int i = 0; i < n; i++) {
 
+            // Check if placing a queen at (row, i) is valid
             if (isValidMove(row, i, solution)) {
+                // Place the queen at column `i` in the current row
                 solution[row] = i;
+
+                // Recur to the next row
                 solveNQueensRec(n, solution, row + 1, results);
+
+                // Backtrack: Remove the queen from the current row
                 solution[row] = -1;
             }
         }
     }
 
+    // Helper function to check if placing a queen is valid
     private boolean isValidMove(int proposedRow, int proposedCol, int[] solution) {
 
+        // Check all previously placed queens
         for (int i = 0; i < proposedRow; i++) {
 
-            int oldRow = i;
-            int oldCol = solution[i];
-            int diagonalOffSet = proposedRow - oldRow;
+            int oldRow = i;             // Row of the previous queen
+            int oldCol = solution[i];   // Column of the previous queen
+            int diagonalOffset = proposedRow - oldRow; // Distance between rows
 
-            if (oldCol == proposedCol || oldCol == proposedCol - diagonalOffSet || oldCol == proposedCol + diagonalOffSet) {
+            // Conditions for invalid placement:
+            // 1. Same column: `oldCol == proposedCol`
+            // 2. Same diagonal: Check if the column difference matches the row difference
+            if (oldCol == proposedCol || 
+                oldCol == proposedCol - diagonalOffset || 
+                oldCol == proposedCol + diagonalOffset) {
                 return false;
             }
         }
+        // If no conflicts, the move is valid
         return true;
     }
 
+    // Helper function to convert the `solution` array into a list of strings
     private List<String> constructSolutionString(int[] solution) {
 
+        // List to store the string representation of the board
         List<String> returnAll = new ArrayList<>();
+
+        // Construct the string for each row
         for (int i = 0; i < solution.length; i++) {
 
+            // Create a row filled with '.' to represent an empty board
             char[] row = new char[solution.length];
             for (int j = 0; j < solution.length; j++) {
                 row[j] = '.';
             }
 
+            // Place the queen ('Q') in the column specified by `solution[i]`
             row[solution[i]] = 'Q';
-            returnAll.add(new String(row));
+            returnAll.add(new String(row)); // Convert the row to a string and add to the list
         }
 
         return returnAll;
     }
 }
+
 
 
 // 4. Min Stack
