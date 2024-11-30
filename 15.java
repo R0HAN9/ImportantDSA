@@ -265,31 +265,50 @@ public class BurstBallons {
     public int maxCoins(int[] nums) {
 
         int n = nums.length;
+
+        // Create an array with two additional elements to handle boundary cases.
         int[] balloons = new int[n + 2];
 
+        // Initialize the boundaries of the balloons array to 1.
         balloons[0] = 1;
         balloons[n + 1] = 1;
 
+        // Copy the input balloons into the new array, adjusting indices.
         for (int i = 0; i < n; i++) {
             balloons[i + 1] = nums[i];
         }
+
+        // dp[i][j] will store the maximum coins that can be obtained
+        // by bursting all the balloons between index i and j.
         int[][] dp = new int[n + 2][n + 2];
 
+        // Iterate over different lengths of the subarrays of balloons to be considered.
         for (int length = 2; length <= n + 1; length++) {
+            // For each possible starting point of the subarray.
             for (int start = 0; start <= n + 1 - length; start++) {
 
+                // The ending point of the subarray.
                 int end = start + length;
+
+                // Try bursting each balloon between start and end.
                 for (int k = start + 1; k < end; k++) {
 
+                    // Calculate the coins obtained by bursting the k-th balloon,
+                    // which is the product of the adjacent balloons at start, k, and end.
                     int coins = balloons[start] * balloons[k] * balloons[end];
-                    int totalCoins = coins + dp[start][k] * dp[k][end];
 
+                    // Add the maximum coins obtained from the subarrays to the left and right of k.
+                    int totalCoins = coins + dp[start][k] + dp[k][end];
+
+                    // Update dp[start][end] with the maximum value.
                     dp[start][end] = Math.max(dp[start][end], totalCoins);
                 }
             }
         }
 
+        // Return the maximum coins that can be obtained for the entire range (from 0 to n + 1).
         return dp[0][n + 1];
     }
 }
+
 
