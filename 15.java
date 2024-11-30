@@ -158,28 +158,39 @@ class Solution {
 class Solution {
     public boolean canPartition(int[] nums) {
         
+        // Step 1: Calculate the total sum of all elements in the array.
         int sum = 0;
         for (int elements : nums) {
             sum += elements;
         }
 
+        // Step 2: If the total sum is odd, it's impossible to partition it into two equal subsets.
         if (sum % 2 != 0) return false;
+        
+        // Step 3: We now need to check if there is a subset whose sum is equal to half of the total sum.
         sum = sum / 2;
 
+        // Step 4: Create a DP array to track which subset sums are achievable.
+        // dp[i] will be true if we can make a sum of `i` using the elements in `nums`.
         boolean dp[] = new boolean[sum + 1];
-        dp[0] = true;
+        dp[0] = true; // We can always make a sum of 0 (empty subset).
 
+        // Step 5: For each element in `nums`, update the DP array.
         for (int num : nums) {
+            // Step 6: Update the DP array backwards (from sum to num) to avoid re-using the same element in the same iteration.
             for (int i = sum; i > 0; i--) {
-
+                // If the current sum `i` can be achieved by including the current number `num`.
                 if (i >= num) {
-                    dp[i] = dp[i] || dp[i - num];
+                    dp[i] = dp[i] || dp[i - num]; // Update dp[i] to be true if dp[i - num] is true.
                 }
             }
         }
+
+        // Step 7: If dp[sum] is true, then we can partition the array into two subsets with equal sum.
         return dp[sum];
     }
 }
+
 
 
 // 6. Kth Smallest Element in a BST
