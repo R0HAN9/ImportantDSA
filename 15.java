@@ -108,38 +108,50 @@ class Solution {
 
 class Solution {
     public int lengthOfLIS(int[] nums) {
+        // Initialize a list `res` to store the elements of the increasing subsequence.
         List<Integer> res = new ArrayList<>();
 
+        // Iterate through each number in the input array `nums`.
         for (int n : nums) {
+            // If `res` is empty or the current number `n` is greater than the last number in `res`,
+            // append `n` to `res` to extend the subsequence.
             if (res.isEmpty() || res.get(res.size() - 1) < n) {
                 res.add(n);
             } else {
+                // If `n` is smaller than or equal to the last element of `res`,
+                // we need to replace the first element that is greater than or equal to `n`.
+                // This is done using binary search to find the index for replacement.
                 int idx = binarySearch(res, n);
-                res.set(idx, n);
+                res.set(idx, n);  // Replace the element at index `idx` with `n`.
             }
         }
 
-        return res.size();        
+        // The size of `res` will give us the length of the longest increasing subsequence.
+        return res.size();
     }
 
+    // Binary search to find the position where `target` should be inserted in `arr`
     private int binarySearch(List<Integer> arr, int target) {
         int left = 0;
         int right = arr.size() - 1;
 
+        // Perform binary search on `arr` to find the smallest element greater than or equal to `target`.
         while (left <= right) {
             int mid = (left + right) / 2;
             if (arr.get(mid) == target) {
-                return mid;
+                return mid;  // Return the index if the target is found.
             } else if (arr.get(mid) > target) {
-                right = mid - 1;
+                right = mid - 1;  // If target is smaller, narrow the search to the left half.
             } else {
-                left = mid + 1;
+                left = mid + 1;  // If target is larger, narrow the search to the right half.
             }
         }
 
+        // When the loop ends, `left` will be the insertion point for the target element.
         return left;
     }    
 }
+
 
 // 5. Partition Equal Subset Sum 
 
