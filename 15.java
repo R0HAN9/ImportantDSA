@@ -237,26 +237,40 @@ class Solution {
 
 class Solution {
     public int[][] merge(int[][] intervals) {
+        
+        // Step 1: Sort intervals based on the start value of each interval
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
+        // Step 2: Initialize a list to hold the merged intervals
         List<int[]> merged = new ArrayList<>();
+
+        // Start with the first interval as the previous interval
         int[] prev = intervals[0];
 
+        // Step 3: Iterate over the remaining intervals
         for (int i = 1; i < intervals.length; i++) {
             int[] interval = intervals[i];
+            
+            // Step 4: If the current interval overlaps with the previous one
             if (interval[0] <= prev[1]) {
+                // Merge the intervals by updating the end of the previous interval
                 prev[1] = Math.max(prev[1], interval[1]);
             } else {
+                // No overlap, so add the previous interval to the result list
                 merged.add(prev);
+                // Move to the next interval
                 prev = interval;
             }
         }
 
+        // Step 5: Add the last interval to the merged list
         merged.add(prev);
 
-        return merged.toArray(new int[merged.size()][]);         
+        // Step 6: Convert the list of merged intervals to a 2D array and return
+        return merged.toArray(new int[merged.size()][]);
     }
 }
+
 
 
 // BurstBallons
