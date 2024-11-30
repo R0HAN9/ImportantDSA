@@ -2,21 +2,31 @@
 
 class Solution {
     public int climbStairs(int n) {
+        // Base cases: if there are 1, 2, or 3 steps, the number of ways to climb
+        // is equal to the number of steps.
         if (n <= 3) return n;
 
+        // Initialize variables to represent the number of ways to climb to the
+        // last two steps (prev1 and prev2). For n = 3, the values are:
+        // prev1 (ways to climb to step 3) = 3
+        // prev2 (ways to climb to step 2) = 2
         int prev1 = 3;
         int prev2 = 2;
-        int cur = 0;
+        int cur = 0; // This will store the current number of ways to climb.
 
+        // Iterate from step 4 up to step n. Calculate the number of ways to climb
+        // to the current step based on the sum of the previous two steps.
         for (int i = 3; i < n; i++) {
-            cur = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = cur;
+            cur = prev1 + prev2; // Current step = sum of ways to climb to the previous two steps.
+            prev2 = prev1;       // Update prev2 to the value of prev1 (move one step ahead).
+            prev1 = cur;         // Update prev1 to the current value (move one step ahead).
         }
 
+        // Return the number of ways to climb to the nth step.
         return cur;        
     }
 }
+
 
 // 2. Coin Change 
 
