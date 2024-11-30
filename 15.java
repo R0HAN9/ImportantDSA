@@ -33,20 +33,38 @@ class Solution {
 class Solution {
     public int coinChange(int[] coins, int amount) {
         
+        // Initialize an array to store the minimum number of coins required for each amount.
+        // The array size is (amount + 1) since we need to compute values from 0 to 'amount'.
         int[] minCoins = new int[amount + 1];
+
+        // Fill the array with a large value (amount + 1) to represent that the amount is initially unreachable.
+        // This ensures any valid solution will replace this value with a smaller count of coins.
         Arrays.fill(minCoins, amount + 1);
+
+        // Base case: The minimum number of coins needed to make amount 0 is 0.
         minCoins[0] = 0;
 
+        // Iterate over each amount from 1 to the target amount.
         for (int i = 1; i <= amount; i++) {
+            // Check each coin to see if it can be used to make the current amount.
             for (int j = 0; j < coins.length; j++) {
+                // If the current amount is greater than or equal to the coin value,
+                // we consider using this coin.
                 if (i - coins[j] >= 0) {
+                    // Update the minimum coins needed for the current amount.
+                    // Take the minimum of the current value and the result of using this coin
+                    // (1 + minCoins[i - coins[j]]).
                     minCoins[i] = Math.min(minCoins[i], 1 + minCoins[i - coins[j]]);
                 }
             }
         }
+
+        // If the value at minCoins[amount] is still the initial large value, 
+        // it means the amount cannot be formed using the given coins. Return -1.
         return minCoins[amount] != amount + 1 ? minCoins[amount] : -1;
     }
 }
+
 
 // 3. Longest Common Subsequence (LCS) 
 
