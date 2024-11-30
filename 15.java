@@ -197,28 +197,41 @@ class Solution {
 
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        
+        // Initialize an array `count` to track how many nodes we've visited.
+        // `kthSmallest` will store the value of the kth smallest node.
         int[] count = new int[]{0};
         int[] kthSmallest = new int[] {Integer.MIN_VALUE};
 
+        // Perform the in-order traversal to find the kth smallest element.
         inOrderHelper(root, count, k, kthSmallest);
-        return kthSmallest[0];
 
+        // Return the kth smallest element found.
+        return kthSmallest[0];
     }
+
+    // Helper function for performing the in-order traversal.
     public void inOrderHelper(TreeNode root, int[] count, int k, int[] kthSmallest) {
+        // Base case: if the node is null or we've already found the kth smallest.
         if (root == null || count[0] >= k) return;
 
+        // Traverse the left subtree.
         inOrderHelper(root.left, count, k, kthSmallest);
+
+        // Increment the count after visiting a node.
         count[0]++;
 
+        // Check if we have visited the kth smallest node.
         if (count[0] == k) {
+            // If so, store the current node's value in `kthSmallest`.
             kthSmallest[0] = root.val;
-            return;
-        } 
+            return;  // Return early as we've found the answer.
+        }
 
+        // Traverse the right subtree.
         inOrderHelper(root.right, count, k, kthSmallest);
     }
 }
+
 
 // 7. Merge Intervals 
 
