@@ -71,25 +71,38 @@ class Solution {
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         
+        // Create a 1D array `dp` to store the length of the LCS for each character in `text1`.
+        // `dp[i]` represents the length of the LCS ending at the ith character of `text1`.
         int[] dp = new int[text1.length()];
+
+        // Variable to keep track of the longest LCS found so far.
         int longest = 0;
 
+        // Iterate through each character in `text2`.
         for (char c : text2.toCharArray()) {
+            // This variable stores the maximum LCS length seen so far for the current character of `text2`.
             int currentLen = 0;
 
+            // Iterate through each character in `text1`.
             for (int i = 0; i < dp.length; i++) {
+                // Update `currentLen` if the LCS length for the previous character of `text1` is greater.
                 if (currentLen < dp[i]) {
                     currentLen = dp[i];
                 }
+                // If the characters of `text1` and `text2` match, update the LCS length for the ith position.
                 else if (c == text1.charAt(i)) {
-                    dp[i] = currentLen + 1;
-                    longest = Math.max(longest, currentLen + 1);
+                    dp[i] = currentLen + 1; // Extend the LCS by 1.
+                    // Update the longest LCS found so far.
+                    longest = Math.max(longest, dp[i]);
                 }
             }
         }
+
+        // Return the length of the longest common subsequence.
         return longest;
     }
 }
+
 
 // 4. Longest Increasing Subsequence (LIS) 
 
