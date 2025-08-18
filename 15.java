@@ -1,4 +1,4 @@
-// 1. Climbing Stairs 
+// 1. Climbing Stairs
 
 class Solution {
     public int climbStairs(int n) {
