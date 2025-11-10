@@ -1,4 +1,4 @@
-// 1. Search in Rotated Sorted Array 
+// 1. Search in Rotated Sorted Array
 
 class Solution {
     public int search(int[] nums, int target) {
